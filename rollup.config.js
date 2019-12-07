@@ -16,6 +16,7 @@ export default [{
   external: [
     'https://unpkg.com/three@0.111.0/build/three.module.js',
     'https://unpkg.com/three@0.111.0/examples/jsm/libs/stats.module.js',
+    'https://unpkg.com/three@0.111.0/examples/jsm/controls/OrbitControls.js',
     'https://unpkg.com/vue@2.6.10/dist/vue.esm.browser.js'
   ]
 }];

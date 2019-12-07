@@ -7,6 +7,8 @@
 import * as THREE from 'https://unpkg.com/three@0.111.0/build/three.module.js';
 import Stats from 'https://unpkg.com/three@0.111.0/examples/jsm/libs/stats.module.js';
 
+import { OrbitControls } from 'https://unpkg.com/three@0.111.0/examples/jsm/controls/OrbitControls.js';
+
 export default {
   data () {
     return {
@@ -33,7 +35,9 @@ export default {
       
       var stats = new Stats();
       sceneRoot.appendChild( stats.dom );
-      
+
+      var orbitControl = new OrbitControls( camera, renderer.domElement );
+
       function animate() {
         requestAnimationFrame( animate );
 
