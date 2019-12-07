@@ -1,8 +1,8 @@
 {
   "name": "project",
   "version": "1.0.0",
-  "description": "beginning of a project",
-  "main": "index.js",
+  "description": "Project using Vue",
+  "main": "dist/index.js",
   "scripts": {
     "start": "./node_modules/.bin/http-server",
     "build": "rollup --config",
@@ -12,6 +12,9 @@
   "license": "ISC",
   "devDependencies": {
     "http-server": "^0.12.0",
-    "rollup": "^1.27.8"
+    "rollup": "^1.27.8",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-vue": "^5.1.1",
+    "vue-template-compiler": "^2.6.10"
   }
 }
