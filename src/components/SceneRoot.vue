@@ -5,6 +5,7 @@
 
 <script>
 import * as THREE from 'https://unpkg.com/three@0.111.0/build/three.module.js';
+import Stats from 'https://unpkg.com/three@0.111.0/examples/jsm/libs/stats.module.js';
 
 export default {
   data () {
@@ -29,7 +30,10 @@ export default {
       scene.add( cube );
 
       camera.position.z = 5;
-
+      
+      var stats = new Stats();
+      sceneRoot.appendChild( stats.dom );
+      
       function animate() {
         requestAnimationFrame( animate );
 
@@ -37,6 +41,7 @@ export default {
         cube.rotation.y += 0.01;
         
         renderer.render( scene, camera );
+        stats.update();
       }
       animate();
 
