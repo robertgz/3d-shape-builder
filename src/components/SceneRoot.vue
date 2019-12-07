@@ -1,29 +1,43 @@
 <template>
-  <div id="sceneRoot">
+  <div v-bind:id="canvasID">
+    <StatsComponent v-bind:parentNodeSelector="canvasNodeSelector" v-bind:panel="0"></StatsComponent>
   </div>
 </template>
 
 <script>
 import * as THREE from 'three';
-import Stats from 'three/examples/jsm/libs/stats.module';
+import StatsComponent from './StatsComponent.vue';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export default {
   data () {
     return {
+      canvasID: "sceneRoot",
+      sceneRootNode: null,
     }
   },
+
+  computed: {
+    canvasNodeSelector: function() {
+        return '#' + this.canvasID;
+      },
+  },
+
+  components: {
+    StatsComponent,
+  },
+
   methods: {
     // Based on code from: https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene
-    init: function() { 
-      var sceneRoot = document.querySelector('#sceneRoot');
+    init: function() {
+      this.sceneRootNode = document.querySelector( this.canvasNodeSelector );
 
       var scene = new THREE.Scene();
       var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
       var renderer = new THREE.WebGLRenderer();
       renderer.setSize( window.innerWidth, window.innerHeight );
-      sceneRoot.appendChild( renderer.domElement );
+      this.sceneRootNode.appendChild( renderer.domElement );
 
       var geometry = new THREE.BoxGeometry( 1, 1, 1 );
       var material = new THREE.MeshBasicMaterial( { color: 0x44aa88 } );
@@ -32,9 +46,6 @@ export default {
 
       camera.position.z = 5;
       
-      var stats = new Stats();
-      sceneRoot.appendChild( stats.dom );
-
       var orbitControl = new OrbitControls( camera, renderer.domElement );
 
       function animate() {
@@ -44,13 +55,13 @@ export default {
         cube.rotation.y += 0.01;
         
         renderer.render( scene, camera );
-        stats.update();
       }
       animate();
 
     }
   },
-    mounted: function () {
+  
+  mounted: function () {
     this.init();
   }
 }

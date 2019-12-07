@@ -11,6 +11,7 @@ export default [{
   output: [{
       file: 'dist/index.esm.js',
       format: 'esm',
+      sourcemap: 'inline',
     },
   ],
   plugins: [

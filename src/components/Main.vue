@@ -10,7 +10,7 @@ import SceneRoot from './SceneRoot.vue';
 export default {
   data () {
     return {
-      message: 'Main Vue app'
+      message: ''
     }
   },
   components: {
