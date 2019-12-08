@@ -9,6 +9,13 @@
       v-bind:renderer="renderer" 
       v-bind:properties="{zoomSpeed: 1}"
     ></OrbitControlsComponent>
+    <BoxComponent
+      v-bind:parentObject="group"
+      v-bind:width="1"
+      v-bind:height="1.25"
+      v-bind:depth="1.5"
+      v-bind:color="0x00ff00"
+    ></BoxComponent>
   </div>
 </template>
 
@@ -16,6 +23,7 @@
 import * as THREE from 'three';
 import StatsComponent from './StatsComponent.vue';
 import OrbitControlsComponent from './OrbitControlsComponent.vue';
+import BoxComponent from './BoxComponent.vue';
 
 export default {
   data () {
@@ -26,6 +34,7 @@ export default {
       scene: null,
       camera: null,
       cube: null,
+      group: null,
     }
   },
 
@@ -38,6 +47,7 @@ export default {
   components: {
     StatsComponent,
     OrbitControlsComponent,
+    BoxComponent,
   },
 
   methods: {
@@ -47,16 +57,14 @@ export default {
       this.sceneRootNode.appendChild( this.renderer.domElement );
     },
     createObject: function() {
-      var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-      var material = new THREE.MeshBasicMaterial( { color: 0x44aa88 } );
-      this.cube = new THREE.Mesh( geometry, material );
-      this.scene.add( this.cube );
+      this.group = new THREE.Group();
+      this.scene.add( this.group );
     },
     animate: function() {
       requestAnimationFrame( this.animate );
 
-      this.cube.rotation.x += 0.01;
-      this.cube.rotation.y += 0.01;
+      this.group.rotation.x += 0.01;
+      this.group.rotation.y += 0.01;
 
       this.renderer.render( this.scene, this.camera );
     },
