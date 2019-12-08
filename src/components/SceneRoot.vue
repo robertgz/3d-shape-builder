@@ -16,6 +16,7 @@
       v-bind:depth="1.5"
       v-bind:color="0x00ff00"
     ></BoxComponent>
+    <DatGUIComponent/>
   </div>
 </template>
 
@@ -24,12 +25,14 @@ import * as THREE from 'three';
 import StatsComponent from './StatsComponent.vue';
 import OrbitControlsComponent from './OrbitControlsComponent.vue';
 import BoxComponent from './BoxComponent.vue';
+import DatGUIComponent from './DatGUIComponent.vue';
 
 export default {
   components: {
     StatsComponent,
     OrbitControlsComponent,
     BoxComponent,
+    DatGUIComponent,
   },
 
   data () {

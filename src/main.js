@@ -1,8 +1,10 @@
-import Vue from 'https://unpkg.com/vue@2.6.10/dist/vue.esm.browser.js';
+import Vue from 'vue';
+import Vuex from 'vuex';
 
 import Main from './components/Main.vue';
 
 function mainVue() {
+  Vue.use(Vuex)
 
   var app = new Vue({
     el: '#app',
