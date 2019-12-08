@@ -26,6 +26,12 @@ import OrbitControlsComponent from './OrbitControlsComponent.vue';
 import BoxComponent from './BoxComponent.vue';
 
 export default {
+  components: {
+    StatsComponent,
+    OrbitControlsComponent,
+    BoxComponent,
+  },
+
   data () {
     return {
       canvasID: "sceneRoot",
@@ -44,32 +50,6 @@ export default {
       },
   },
 
-  components: {
-    StatsComponent,
-    OrbitControlsComponent,
-    BoxComponent,
-  },
-
-  methods: {
-    // Based on code from: https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene
-    init: function() {
-      this.sceneRootNode = document.querySelector( this.canvasNodeSelector );
-      this.sceneRootNode.appendChild( this.renderer.domElement );
-    },
-    createObject: function() {
-      this.group = new THREE.Group();
-      this.scene.add( this.group );
-    },
-    animate: function() {
-      requestAnimationFrame( this.animate );
-
-      this.group.rotation.x += 0.01;
-      this.group.rotation.y += 0.01;
-
-      this.renderer.render( this.scene, this.camera );
-    },
-  },
-
   created: function() {
     this.renderer = new THREE.WebGLRenderer();
     this.scene = new THREE.Scene();
@@ -84,6 +64,26 @@ export default {
   mounted: function () {
     this.init();       
     this.animate();
+  },
+
+  methods: {
+    // Based on code from: https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene
+    init: function() {
+      this.sceneRootNode = document.querySelector( this.canvasNodeSelector );
+      this.sceneRootNode.appendChild( this.renderer.domElement );      
+    },
+    createObject: function() {
+      this.group = new THREE.Group();
+      this.scene.add( this.group );
+    },
+    animate: function() {
+      requestAnimationFrame( this.animate );
+
+      this.group.rotation.x += 0.01;
+      this.group.rotation.y += 0.01;
+
+      this.renderer.render( this.scene, this.camera );
+    },
   }
 }
 </script>

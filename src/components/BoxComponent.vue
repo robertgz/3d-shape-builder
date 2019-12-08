@@ -32,6 +32,10 @@ export default {
       box: null,
     }
   },
+  
+  mounted: function () {
+    this.init();
+  },
 
   methods: {
     init: function() {
@@ -40,10 +44,6 @@ export default {
       this.box = new Mesh( this.geometry, this.material );
       this.parentObject.add( this.box );
     }
-  },
-  
-  mounted: function () {
-    this.init();
   },
 }
 </script>

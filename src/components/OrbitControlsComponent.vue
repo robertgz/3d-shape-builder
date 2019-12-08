@@ -13,13 +13,16 @@ export default {
     renderer: Object,
     properties: Object,
   },
-  computed: {
-  },
 
   data () {
     return {
       orbitControl: null,
     }
+  },
+  
+  mounted: function () {
+    this.orbitControl = new OrbitControls( this.object, this.renderer.domElement );
+    this.updateProperties();
   },
 
   methods: {
@@ -28,11 +31,6 @@ export default {
         this.orbitControl[property] = this.properties[property];
       }
     }
-  },
-  
-  mounted: function () {
-    this.orbitControl = new OrbitControls( this.object, this.renderer.domElement );
-    this.updateProperties();
   },
 }
 </script>

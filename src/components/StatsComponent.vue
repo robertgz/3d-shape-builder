@@ -20,6 +20,11 @@ export default {
       sceneRootNode: null,
     }
   },
+  
+  mounted: function () {
+    this.init();
+    this.animate();
+  },
 
   methods: {
     init: function() {
@@ -33,11 +38,6 @@ export default {
       this.stats.update();
       requestAnimationFrame( this.animate );
     }
-  },
-  
-  mounted: function () {
-    this.init();
-    this.animate();
   },
 }
 </script>

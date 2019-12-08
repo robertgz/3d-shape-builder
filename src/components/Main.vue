@@ -8,13 +8,13 @@
 import SceneRoot from './SceneRoot.vue';
 
 export default {
+  components: {
+      SceneRoot,
+  },
   data () {
     return {
       message: ''
     }
-  },
-  components: {
-      SceneRoot,
   },
 }
 </script>
