@@ -29,15 +29,15 @@ export default {
       this.sceneRootNode = document.querySelector(this.parentNodeSelector)
       this.sceneRootNode.appendChild( this.stats.dom );
     },
-    update: function () {
+    animate: function () {
       this.stats.update();
-      requestAnimationFrame( this.update );
+      requestAnimationFrame( this.animate );
     }
   },
   
   mounted: function () {
     this.init();
-    this.update();
+    this.animate();
   },
 }
 </script>
