@@ -1,13 +1,13 @@
 import Vue from 'vue';
-import Vuex from 'vuex';
+import store from './store';
 
 import Main from './components/Main.vue';
 
 function mainVue() {
-  Vue.use(Vuex)
 
   var app = new Vue({
     el: '#app',
+    store,
     components: {
       Main,
     },
