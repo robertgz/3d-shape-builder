@@ -17,8 +17,6 @@
 import * as THREE from 'three';
 import StatsComponent from './StatsComponent.vue';
 import OrbitControlsComponent from './OrbitControlsComponent.vue';
-import BoxComponent from './BoxComponent.vue';
-import DatGUIComponent from './DatGUIComponent.vue';
 import BasicGUIComponent from './BasicGUIComponent.vue';
 import * as util from '../libs/utils.js';
 
@@ -26,8 +24,6 @@ export default {
   components: {
     StatsComponent,
     OrbitControlsComponent,
-    BoxComponent,
-    DatGUIComponent,
     BasicGUIComponent,
   },
 
