@@ -9,14 +9,7 @@
       v-bind:renderer="renderer" 
       v-bind:properties="{zoomSpeed: 1}"
     ></OrbitControlsComponent>
-    <BoxComponent
-      v-bind:parentObject="group"
-      v-bind:width="1"
-      v-bind:height="1.25"
-      v-bind:depth="1.5"
-      v-bind:color="0x00ff00"
-    ></BoxComponent>
-    <DatGUIComponent/>
+    <BasicGUIComponent/>
   </div>
 </template>
 
@@ -26,6 +19,8 @@ import StatsComponent from './StatsComponent.vue';
 import OrbitControlsComponent from './OrbitControlsComponent.vue';
 import BoxComponent from './BoxComponent.vue';
 import DatGUIComponent from './DatGUIComponent.vue';
+import BasicGUIComponent from './BasicGUIComponent.vue';
+import * as util from '../libs/utils.js';
 
 export default {
   components: {
@@ -33,6 +28,14 @@ export default {
     OrbitControlsComponent,
     BoxComponent,
     DatGUIComponent,
+    BasicGUIComponent,
+  },
+
+  provide: function() {
+    return {
+      util: util,
+      getScene: this.getScene
+    }
   },
 
   data () {
@@ -86,6 +89,9 @@ export default {
       this.group.rotation.y += 0.01;
 
       this.renderer.render( this.scene, this.camera );
+    },
+    getScene: function () {
+      return this.scene;
     },
   }
 }
