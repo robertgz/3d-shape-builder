@@ -9,7 +9,7 @@ import livereload from 'rollup-plugin-livereload';
 let threeRoot = 'https://unpkg.com/three@0.111.0';
 
 export default [{
-  input: './src/main.js',
+  input: './src/app.js',
 
   output: [{
       file: 'dist/index.esm.js',
