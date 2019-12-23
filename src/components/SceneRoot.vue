@@ -18,7 +18,7 @@ import * as THREE from 'three';
 import StatsComponent from './StatsComponent.vue';
 import OrbitControlsComponent from './OrbitControlsComponent.vue';
 import BasicGUIComponent from './BasicGUIComponent.vue';
-import * as util from '../libs/utils.js';
+// import * as util from '../libs/utils.js';
 
 export default {
   components: {
@@ -28,21 +28,13 @@ export default {
   },
 
   provide: function() {
-    return {
-      util: util,
-      getScene: this.getScene
-    }
+    return {  }
   },
 
   data () {
     return {
       canvasID: "sceneRoot",
       sceneRootNode: null,
-      renderer: null,
-      scene: null,
-      camera: null,
-      cube: null,
-      group: null,
     }
   },
 
@@ -50,45 +42,33 @@ export default {
     canvasNodeSelector: function() {
         return '#' + this.canvasID;
       },
+      renderer: function() {
+        return this.$store.getters.getRenderer;
+      },
+      camera: function() {
+        return this.$store.getters.getCamera;
+      },
   },
 
   created: function() {
-    this.renderer = new THREE.WebGLRenderer();
-    this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );  
-    
-    this.renderer.setSize( window.innerWidth, window.innerHeight );
-    this.camera.position.z = 5;
-
-    this.createObject(); 
+    this.$store.dispatch('setup3', {
+      width: window.innerWidth, height: window.innerHeight
+    });
   },
 
   mounted: function () {
-    this.init();       
-    this.animate();
+    // this.init();
+
+    this.$store.commit('addSceneToCanvas', {
+      canvas: this.canvasNodeSelector,
+    });
+
+    this.$store.commit('startRendering');
   },
 
   methods: {
-    // Based on code from: https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene
-    init: function() {
-      this.sceneRootNode = document.querySelector( this.canvasNodeSelector );
-      this.sceneRootNode.appendChild( this.renderer.domElement );      
-    },
-    createObject: function() {
-      this.group = new THREE.Group();
-      this.scene.add( this.group );
-    },
-    animate: function() {
-      requestAnimationFrame( this.animate );
+    init: function() {  },
 
-      this.group.rotation.x += 0.01;
-      this.group.rotation.y += 0.01;
-
-      this.renderer.render( this.scene, this.camera );
-    },
-    getScene: function () {
-      return this.scene;
-    },
   }
 }
 </script>
