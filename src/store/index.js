@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex';
-import meshes from './meshes';
+import meshes from './meshes.store';
 import scene from './scene.store';
 
 Vue.use(Vuex);
