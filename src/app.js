@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import store from './store/index.store';
-
-import Main from './components/Main.vue';
+import App from './components/App.vue';
 
 function mainVue() {
 
@@ -9,9 +8,9 @@ function mainVue() {
     el: '#app',
     store,
     components: {
-      Main,
+      App,
     },
-    template: '<div><Main></Main></div>',
+    template: '<div><App></App></div>',
   });
 
 }
