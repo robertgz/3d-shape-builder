@@ -3,17 +3,21 @@ import VuePlugin from 'rollup-plugin-vue';
 // "rollup-plugin-vue": "5.1.1", works but 5.1.2+ does not as of 11/30/2019
 
 import alias from '@rollup/plugin-alias';
+import serve from 'rollup-plugin-serve';
+import livereload from 'rollup-plugin-livereload';
 
 let threeRoot = 'https://unpkg.com/three@0.111.0';
 
 export default [{
   input: './src/main.js',
+
   output: [{
       file: 'dist/index.esm.js',
       format: 'esm',
-      sourcemap: 'inline',
+      // sourcemap: 'inline',
     },
   ],
+
   plugins: [
     commonjs(),
     alias({ 
@@ -41,6 +45,15 @@ export default [{
       ]
     }),    
     VuePlugin(),
+    ...process.env.RELOAD ? [
+      serve({
+        contentBase: [''],
+        host: 'localhost',
+        port: 8080,
+      }),
+      livereload(['dist', 'index.html']),
+    ] : [],
+    
   ],
   external: [
     'https://unpkg.com/three@0.111.0/build/three.module.js',
