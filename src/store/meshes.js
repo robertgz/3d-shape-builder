@@ -1,8 +1,10 @@
-import Vue from 'vue'
+import Vue from 'vue';
+import { BoxGeometry, MeshBasicMaterial, Mesh } from 'three';
 
 const meshes = {
   state: {
     meshObjs: {},
+    defaultColor: 0x808080,
   },
 
   getters: {
@@ -19,21 +21,89 @@ const meshes = {
       return { ...state.meshObjs[id].scale };
     },
 
+    getMeshPositionByID: (state) => (id) => {
+      return { ...state.meshObjs[id].position };
+    },
+
   },
 
-  actions: {},
+  actions: {
+    addBox(context, payload) {
+      let geometry = new BoxGeometry( 1, 1, 1 );
 
-  mutations: {
+      context.dispatch('addMesh', { geometry: geometry, type: 'box' });
+    },
 
-    addMeshObj(state, payload) {
+    addMesh(context, payload) {
 
-      Vue.set(state.meshObjs, payload.id, {
-        type: payload.type,
-        location: { ...payload.location },
-        scale: { ...payload.scale },
-        color: payload.color,
+      let geometry = null;
+      if (payload.geometry) {
+        geometry = payload.geometry;
+      } else {
+        geometry = new BoxGeometry( 1, 1, 1 );
+      }
+
+      let material = new MeshBasicMaterial( { color: context.state.defaultColor } );
+      let mesh = new Mesh( geometry, material );
+
+      context.commit('addToScene', { object: mesh });
+      // context.getters.getScene.add( mesh );
+
+      context.commit('addMeshObj', {
+        mesh: mesh,
+        id: mesh.id, // needed to use as key name, added
+        type: 'box', //payload.type
       });
 
+    },
+
+    deleteMesh( context, payload ) {
+      let id = parseInt( payload.id, 10 );
+
+      let scene = context.getters.getScene;
+      let meshObject = scene.getObjectById( id );
+
+      scene.remove( meshObject );    
+      // meshObject.dispose();
+    
+      context.commit('deleteMeshObj', { id: id });
+    },
+
+    setMeshPosition( context, payload ) {
+      let scene = context.getters.getScene;
+      let meshObject = scene.getObjectById( parseInt( payload.id, 10 ) );
+
+      if (payload.axis === 'x') {
+        meshObject.position.setX(payload.amount);
+      } else if (payload.axis === 'y') {
+        meshObject.position.setY(payload.amount);
+      } else if (payload.axis === 'z') {
+        meshObject.position.setZ(payload.amount);
+      }
+
+      context.commit('setMeshObjPosition', {
+        id: payload.id,
+        axis: payload.axis,
+        amount: payload.amount,
+      });
+    },
+  },
+
+  mutations: {
+    addMeshObj(state, payload) {
+
+      Vue.set(state.meshObjs, payload.id, { // payload.mesh.id does not work, not sure why?
+        type: payload.type,
+        position: {...payload.mesh.position},
+        scale: {...payload.mesh.scale},
+        color: payload.mesh.material.color.getHexString(),
+      });
+
+    },
+
+    setMeshObjPosition(state, payload) {  
+      state.meshObjs[payload.id].position[payload.axis] = parseInt( payload.amount, 10 );
+      // state.meshObjs[payload.id].scale[payload.axis] = parseInt( payload.amount, 10 );
     },
 
     deleteMeshObj(state, payload) {
