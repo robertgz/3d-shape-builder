@@ -47,7 +47,6 @@ const meshes = {
       let mesh = new Mesh( geometry, material );
 
       context.commit('addToScene', { object: mesh });
-      // context.getters.getScene.add( mesh );
 
       context.commit('addMeshObj', {
         mesh: mesh,
