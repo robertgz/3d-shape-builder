@@ -1,28 +1,40 @@
 import Vue from 'vue'
 import * as THREE from 'three';
 
+const graph = {
+  root: null,
+  scene: null,
+  selected: null,
+  renderer: null,
+  camera: null,
+  renderList: [],
+  sceneRootNode: null, // canvas HTML element
+};
+
 const scene = {
+  // namespaced: true,
   state: {
-    renderer: null,
-    scene: null,
-    camera: null,
-    sceneRootNode: null, // canvas
+    renderList: [],
   },
 
   getters: {
     getScene (state) {
-      return state.scene;
+      return graph.scene;
     },
     
     getRenderer (state) {
-      return state.renderer;
+      return graph.renderer;
     },
     
     getCamera (state) {
-      return state.camera;
+      return graph.camera;
+    },
+    
+    getCanvas (state) {
+      return graph.sceneRootNode;
     },
 
-   },
+  },
 
   actions: {
     setup3 (context, { width, height }) {
@@ -31,58 +43,52 @@ const scene = {
       context.commit('setupCamera', { width, height });
       console.log('setup done');
     },
-  },
-
-  mutations: { 
-    setupRenderer (state, payload) {
-      state.renderer = new THREE.WebGLRenderer();
-      state.renderer.setSize( payload.width, payload.height );      
-    },
-    setupScene (state, payload) {
-      state.scene = new THREE.Scene();
-    },
-    setupCamera (state, payload) {
-      state.camera = new THREE.PerspectiveCamera( 75, payload.width/payload.height, 0.1, 1000 );  
     
-      state.camera.position.z = 5;
-    },
-    addSceneToCanvas(state, payload) {
-      state.sceneRootNode = document.querySelector( payload.canvas );
-      state.sceneRootNode.appendChild( state.renderer.domElement );
+    addSceneToCanvas(context, payload) {
+      graph.sceneRootNode = document.querySelector( payload.canvas );
+      graph.sceneRootNode.appendChild( graph.renderer.domElement );
       console.log('scene added');
     },
-    startRendering(state) {
-      console.log('rendering started');
 
-      // let raycaster = new THREE.Raycaster();
-      // let mouse = new THREE.Vector2();
-      // function onMouseMove(event) {
-      //   // console.log('event', event);
-      //   mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-      //   mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;        
-      // };
+    startRendering(context) {
+      console.log('rendering1 started');
 
       let animate = () => {
         requestAnimationFrame( animate );
 
-        // raycaster.setFromCamera( mouse, state.camera );
-        // var intersects = raycaster.intersectObjects( state.scene.children );
-        // for ( var i = 0; i < intersects.length; i++ ) {
-        //   intersects[ i ].object.material.color.set( 0xff0000 );      
-        // }
-
-        state.renderer.render( state.scene, state.camera );
+        graph.renderer.render( graph.root, graph.camera );
       };
-
-      // window.addEventListener( 'mousemove', onMouseMove, false );
-
       animate();
     },
-    addToScene(state, payload) {
-      state.scene.add(payload.object);
-    }
   },
 
+  mutations: { 
+    setupRenderer (state, payload) {
+      graph.renderer = new THREE.WebGLRenderer();
+      graph.renderer.setSize( payload.width, payload.height );
+    },
+
+    setupScene (state, payload) {
+      graph.root = new THREE.Scene();
+
+      graph.scene = new THREE.Group();
+      graph.selected = new THREE.Group();
+      
+      graph.root.add( graph.scene );
+      graph.root.add( graph.selected );
+    },
+
+    setupCamera (state, payload) {
+      graph.camera = new THREE.PerspectiveCamera( 75, payload.width/payload.height, 0.1, 1000 );  
+    
+      graph.camera.position.z = 5;
+    },
+
+    addToScene(state, payload) {
+      graph.scene.add(payload.object);
+    },
+
+  },
 }
 
 export default scene;

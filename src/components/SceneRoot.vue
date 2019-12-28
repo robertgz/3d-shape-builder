@@ -1,5 +1,6 @@
 <template>
-  <div v-bind:id="canvasID">
+<div>
+    <div v-bind:id="canvasID" v-on:click="clicked"></div>
     <StatsComponent 
       v-bind:parentNodeSelector="canvasNodeSelector" 
       v-bind:panel="0"
@@ -9,8 +10,8 @@
       v-bind:renderer="renderer" 
       v-bind:properties="{zoomSpeed: 1}"
     ></OrbitControlsComponent>
-    <BasicGUIComponent/>
-  </div>
+    <BasicGUIComponent/>  
+</div>
 </template>
 
 <script>
@@ -18,7 +19,6 @@ import * as THREE from 'three';
 import StatsComponent from './StatsComponent.vue';
 import OrbitControlsComponent from './OrbitControlsComponent.vue';
 import BasicGUIComponent from './BasicGUIComponent.vue';
-// import * as util from '../libs/utils.js';
 
 export default {
   components: {
@@ -43,11 +43,16 @@ export default {
         return '#' + this.canvasID;
       },
       renderer: function() {
-        return this.$store.getters.getRenderer;
+        return this.$store.getters['getRenderer'];
+
       },
       camera: function() {
-        return this.$store.getters.getCamera;
+        return this.$store.getters['getCamera'];
+
       },
+      listenForClick () {
+        return this.$store.getters['mouse/listen'];
+      }      
   },
 
   created: function() {
@@ -59,15 +64,28 @@ export default {
   mounted: function () {
     // this.init();
 
-    this.$store.commit('addSceneToCanvas', {
+    this.$store.dispatch('addSceneToCanvas', {
       canvas: this.canvasNodeSelector,
     });
 
-    this.$store.commit('startRendering');
+    this.$store.dispatch('startRendering');
   },
 
   methods: {
     init: function() {  },
+
+    clicked: function(event) {
+      if (this.listenForClick) {
+
+        let options = {
+          x:   ( event.clientX / window.innerWidth )  * 2 - 1,
+          y: - ( event.clientY / window.innerHeight ) * 2 + 1,
+        };
+
+        this.$store.dispatch('mouse/clicked', options);
+      }
+
+    },
 
   }
 }
