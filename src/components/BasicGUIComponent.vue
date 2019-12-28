@@ -35,6 +35,18 @@
         class="pure-button panelBtn">
          Delete
       </button>
+
+      <button 
+        v-on:click="selectOn" 
+        class="pure-button panelBtn">
+         Select:on
+      </button>
+
+      <button 
+        v-on:click="selectOff" 
+        class="pure-button panelBtn">
+         Select:off
+      </button>
     </div>
 
 
@@ -139,6 +151,14 @@ export default {
         console.log('size: ', size);
       }
     },
+
+    selectOn: function (event) {
+      this.$store.dispatch('select/enableSelect');
+    },
+
+    selectOff: function (event) {
+      this.$store.dispatch('select/disableSelect');
+    },
     
   },
 }
@@ -199,7 +219,7 @@ export default {
     top: 60px;
     left: 20px;
     width: 150px;
-    height: 300px;
+    height: 340px;
     background-color: #cfc;
   }
 
@@ -207,7 +227,7 @@ export default {
     position: absolute;
     z-index: 1;
     padding: 15px 6px 15px 6px;
-    top: 380px;
+    top: 420px;
     left: 20px;
     width: 150px;
     /* height: 150px; */
