@@ -22,6 +22,13 @@ export default {
   
   mounted: function () {
     this.orbitControl = new OrbitControls( this.object, this.renderer.domElement );
+    
+    this.orbitControl.mouseButtons = {
+      LEFT: 0,
+      MIDDLE: 1,
+      RIGHT: 2
+    };
+
     this.updateProperties();
   },
 
