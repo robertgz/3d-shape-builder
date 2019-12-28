@@ -14,7 +14,6 @@ const graph = {
 const scene = {
   // namespaced: true,
   state: {
-    renderList: [],
   },
 
   getters: {
@@ -56,13 +55,17 @@ const scene = {
       let animate = () => {
         requestAnimationFrame( animate );
 
+        // if (graph.renderList.length > 0) {
+        //   graph.renderList[0]();
+        // }
+
         graph.renderer.render( graph.root, graph.camera );
       };
       animate();
     },
   },
 
-  mutations: { 
+  mutations: {
     setupRenderer (state, payload) {
       graph.renderer = new THREE.WebGLRenderer();
       graph.renderer.setSize( payload.width, payload.height );
@@ -87,6 +90,17 @@ const scene = {
     addToScene(state, payload) {
       graph.scene.add(payload.object);
     },
+
+    // addRenderer(state, payload) {
+    //   console.log('addRenderer');
+    //   graph.renderList.push(payload.renderer);
+    // },
+
+    // removeRenderer(state, payload) {},
+
+    // removeAllRenderers(state) {
+    //   graph.renderList.length = 0;
+    // },
 
   },
 }
