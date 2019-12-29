@@ -24,27 +24,41 @@ const selection = {
   },
 
   actions: {
-    
-    doRayCasting(context, payload) {
+    setup(context, payload) {},
+
+    doRayCasting(context) {
+
       let camera = context.rootGetters['scene/getCamera'];
       let scene = context.rootGetters['scene/getScene'];
       let mouse = context.rootGetters['mouse/locationVector'];
 
-      context.state.raycaster.setFromCamera( mouse, camera );
+      data.raycaster.setFromCamera( mouse, camera );
+      data.raycaster.linePrecision = 0.1;
+
+      let intersects = data.raycaster.intersectObjects( scene.children, true );
+
+      context.dispatch('doSelecting', {
+        intersectedObjects: intersects
+      });
       
-      let intersects = context.state.raycaster.intersectObjects( scene.children );
+    },
 
-      for ( var i = 0; i < intersects.length; i++ ) {
-        intersects[ i ].object.material.color.set( 0x00ff00 );
-        // console.log('intersected object.id: ', intersects[ i ].object.id);
+    doSelecting(context, { intersectedObjects }) {
+
+      if (intersectedObjects.length > 0) {
+
+        context.commit('clearSelection');
+
+        context.commit('addToSelection', {
+          object: intersectedObjects[ 0 ].object.parent,
+        });
+
+      } else if (intersectedObjects.length === 0) {
+
+        context.commit('clearSelection');
+
       }
 
-      if (intersects.length > 0) {
-        context.state.selectedSet.add(intersects[ 0 ].object.id);
-      } else if (intersects.length === 0) {
-        context.state.selectedSet.clear();
-      }
-      console.log('context.state.selectedSet', context.state.selectedSet);
     },
 
     enableSelect(context) {
@@ -99,7 +113,7 @@ const selection = {
       data.selected.delete(object.id);
 
     },
-    
+
     clearSelection(state) {
 
       state.selectedSet.clear();
