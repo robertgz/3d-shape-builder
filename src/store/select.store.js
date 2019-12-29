@@ -53,14 +53,15 @@ const selection = {
       context.state.selectionActive = true;
       context.dispatch('mouse/enableListening', null, { root: true });
 
-      context.state.mouseUnwatch = this.watch(function () {
-        return context.rootGetters['mouse/location'];
-      }, 
-      function (newVal, oldVal) {
-        context.dispatch('doRayCasting');
-      },
+      data.mouseUnwatch = this.watch(function () {
+          return context.rootGetters['mouse/location'];
+        }, 
+        function (newVal, oldVal) {
+          context.dispatch('doRayCasting');
+        },
         { deep: true }
       );
+
     },
 
     disableSelect(context) {
@@ -70,8 +71,9 @@ const selection = {
       context.dispatch('mouse/disableListening', null, { root: true });
 
       if ( context.state.mouseUnwatch ) {
-        context.state.mouseUnwatch(); 
+        data.mouseUnwatch(); 
       }
+
     },
 
   },
