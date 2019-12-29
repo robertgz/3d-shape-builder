@@ -43,11 +43,11 @@ export default {
         return '#' + this.canvasID;
       },
       renderer: function() {
-        return this.$store.getters['getRenderer'];
+        return this.$store.getters['scene/getRenderer'];
 
       },
       camera: function() {
-        return this.$store.getters['getCamera'];
+        return this.$store.getters['scene/getCamera'];
 
       },
       listenForClick () {
@@ -56,7 +56,7 @@ export default {
   },
 
   created: function() {
-    this.$store.dispatch('setup3', {
+    this.$store.dispatch('scene/setup3', {
       width: window.innerWidth, height: window.innerHeight
     });
   },
@@ -64,11 +64,11 @@ export default {
   mounted: function () {
     // this.init();
 
-    this.$store.dispatch('addSceneToCanvas', {
+    this.$store.dispatch('scene/addSceneToCanvas', {
       canvas: this.canvasNodeSelector,
     });
 
-    this.$store.dispatch('startRendering');
+    this.$store.dispatch('scene/startRendering');
   },
 
   methods: {

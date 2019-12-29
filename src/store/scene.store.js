@@ -12,7 +12,7 @@ const graph = {
 };
 
 const scene = {
-  // namespaced: true,
+  namespaced: true,
   state: {
   },
 

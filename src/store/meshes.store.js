@@ -46,7 +46,7 @@ const meshes = {
       let material = new MeshBasicMaterial( { color: context.state.defaultColor } );
       let mesh = new Mesh( geometry, material );
 
-      context.commit('addToScene', { object: mesh });
+      context.commit('scene/addToScene', { object: mesh });
 
       context.commit('addMeshObj', {
         mesh: mesh,
@@ -59,7 +59,7 @@ const meshes = {
     deleteMesh( context, payload ) {
       let id = parseInt( payload.id, 10 );
 
-      let scene = context.getters.getScene;
+      let scene = context.rootGetters['scene/getScene'];
       let meshObject = scene.getObjectById( id );
 
       scene.remove( meshObject );    
@@ -69,7 +69,7 @@ const meshes = {
     },
 
     setMeshPosition( context, payload ) {
-      let scene = context.getters.getScene;
+      let scene = context.rootGetters['scene/getScene'];
       let meshObject = scene.getObjectById( parseInt( payload.id, 10 ) );
 
       if (payload.axis === 'x') {

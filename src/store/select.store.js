@@ -20,8 +20,8 @@ const selection = {
   actions: {
     
     doRayCasting(context, payload) {
-      let camera = context.rootGetters['getCamera'];
-      let scene = context.rootGetters['getScene'];
+      let camera = context.rootGetters['scene/getCamera'];
+      let scene = context.rootGetters['scene/getScene'];
       let mouse = context.rootGetters['mouse/locationVector'];
 
       context.state.raycaster.setFromCamera( mouse, camera );
