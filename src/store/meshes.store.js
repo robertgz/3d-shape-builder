@@ -1,5 +1,11 @@
 import Vue from 'vue';
 import { BoxGeometry, MeshBasicMaterial, Mesh } from 'three';
+import * as THREE from 'three';
+
+const materials = {
+  default: null,
+  selected: null,
+};
 
 const meshes = {
   namespaced: true,
@@ -29,8 +35,24 @@ const meshes = {
   },
 
   actions: {
+    setup(context, payload) {
+
+      materials.default = new THREE.MeshBasicMaterial({
+        color: context.state.defaultColor,
+        polygonOffset: true,
+        polygonOffsetFactor: 1, // positive value pushes polygon further away
+        polygonOffsetUnits: 1
+      });
+
+      materials.selected = new THREE.LineBasicMaterial({
+        color: 0xffffff,
+        linewidth: 1,
+      });
+
+    },
+
     addBox(context, payload) {
-      let geometry = new BoxGeometry( 1, 1, 1 );
+      let geometry = new THREE.BoxGeometry( 1, 1, 1 );
 
       context.dispatch('addMesh', { geometry: geometry, type: 'box' });
     },
@@ -41,7 +63,7 @@ const meshes = {
       if (payload.geometry) {
         geometry = payload.geometry;
       } else {
-        geometry = new BoxGeometry( 1, 1, 1 );
+        geometry = new THREE.BoxGeometry( 1, 1, 1 );
       }
 
       let material = new MeshBasicMaterial( { color: context.state.defaultColor } );
