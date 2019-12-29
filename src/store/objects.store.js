@@ -57,37 +57,45 @@ const objects = {
       context.dispatch('addMesh', { geometry: geometry, type: 'box' });
     },
 
-    addMesh(context, payload) {
+    addMesh(context, { geometry, type }) {
 
-      let geometry = null;
-      if (payload.geometry) {
-        geometry = payload.geometry;
-      } else {
+      if (!geometry) {
         geometry = new THREE.BoxGeometry( 1, 1, 1 );
       }
 
-      let material = new MeshBasicMaterial( { color: context.state.defaultColor } );
-      let mesh = new Mesh( geometry, material );
+      if (!type) { type = 'box'; }
+
+      let mesh = new THREE.Mesh( geometry, materials.default );
+      mesh.name = 'mesh';
+
+      var edgesGeometry = new THREE.EdgesGeometry( geometry );
+      var line = new THREE.LineSegments( edgesGeometry, materials.selected );
+      line.name = 'selected';
+      line.visible = false;
+
+      let group = new THREE.Group();
+
+      group.add(mesh, line);
 
       context.commit(
         'scene/addToScene', 
-        { object: mesh }, 
+        { object: group },
         { root: true }
       );
 
       context.commit('addMeshObj', {
-        mesh: mesh,
-        id: mesh.id, // needed to use as key name, added
-        type: 'box', //payload.type
+        object: group,
+        id: group.id, // needed to use as key name, added
+        type: type,
       });
 
     },
 
-    deleteMesh( context, payload ) {
-      let id = parseInt( payload.id, 10 );
+    deleteMesh( context, { id } ) {
+      let objectId = parseInt( id, 10 );
 
       let scene = context.rootGetters['scene/getScene'];
-      let meshObject = scene.getObjectById( id );
+      let meshObject = scene.getObjectById( objectId );
 
       scene.remove( meshObject );    
       // meshObject.dispose();
@@ -95,45 +103,46 @@ const objects = {
       context.commit('deleteMeshObj', { id: id });
     },
 
-    setMeshPosition( context, payload ) {
+    setMeshPosition( context, { id, axis, amount } ) {
       let scene = context.rootGetters['scene/getScene'];
-      let meshObject = scene.getObjectById( parseInt( payload.id, 10 ) );
+      let meshObject = scene.getObjectById( parseInt( id, 10 ) );
 
-      if (payload.axis === 'x') {
-        meshObject.position.setX(payload.amount);
-      } else if (payload.axis === 'y') {
-        meshObject.position.setY(payload.amount);
-      } else if (payload.axis === 'z') {
-        meshObject.position.setZ(payload.amount);
+      if (axis === 'x') {
+        meshObject.position.setX(amount);
+      } else if (axis === 'y') {
+        meshObject.position.setY(amount);
+      } else if (axis === 'z') {
+        meshObject.position.setZ(amount);
       }
 
       context.commit('setMeshObjPosition', {
-        id: payload.id,
-        axis: payload.axis,
-        amount: payload.amount,
+        id: id,
+        axis: axis,
+        amount: amount,
       });
     },
   },
 
   mutations: {
-    addMeshObj(state, payload) {
+    addMeshObj(state, { id, object, type }) {
 
-      Vue.set(state.meshObjs, payload.id, { // payload.mesh.id does not work, not sure why?
-        type: payload.type,
-        position: {...payload.mesh.position},
-        scale: {...payload.mesh.scale},
-        color: payload.mesh.material.color.getHexString(),
+      Vue.set(state.meshObjs, id, { // object.id does not work, not sure why?
+        type: type,
+        position: {...object.position},
+        scale: {...object.scale},
+        // color: object.material.color.getHexString(),
       });
 
     },
 
-    setMeshObjPosition(state, payload) {  
-      state.meshObjs[payload.id].position[payload.axis] = parseInt( payload.amount, 10 );
-      // state.meshObjs[payload.id].scale[payload.axis] = parseInt( payload.amount, 10 );
+    setMeshObjPosition(state, { id, axis, amount }) {
+      state.meshObjs[id].position[axis] = parseInt( amount, 10 );
+
+      // state.meshObjs[id].scale[axis] = parseInt( amount, 10 );
     },
 
-    deleteMeshObj(state, payload) {
-      Vue.delete(state.meshObjs, payload.id);
+    deleteMeshObj(state, { id }) {
+      Vue.delete(state.meshObjs, id);
     },
 
   },
