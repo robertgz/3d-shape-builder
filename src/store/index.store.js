@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex';
-import objects from './meshes.store';
+import objects from './objects.store';
 import scene from './scene.store';
 import mouse from './mouse.store';
 import select from './select.store';
