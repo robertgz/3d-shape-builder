@@ -11,10 +11,8 @@ const selection = {
   modules: {},
 
   state: {
-    raycaster: new THREE.Raycaster(),
-    selectedSet: new Set(),
+    selectedSet: new Set(), // list of Object3D.ids
     selectionActive: false,
-    mouseUnwatch: null,
   },
 
   getters: {
