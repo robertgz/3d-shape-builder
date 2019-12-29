@@ -2,6 +2,7 @@ import Vue from 'vue';
 import { BoxGeometry, MeshBasicMaterial, Mesh } from 'three';
 
 const meshes = {
+  namespaced: true,
   state: {
     meshObjs: {},
     defaultColor: 0x808080,
@@ -46,7 +47,11 @@ const meshes = {
       let material = new MeshBasicMaterial( { color: context.state.defaultColor } );
       let mesh = new Mesh( geometry, material );
 
-      context.commit('scene/addToScene', { object: mesh });
+      context.commit(
+        'scene/addToScene', 
+        { object: mesh }, 
+        { root: true }
+      );
 
       context.commit('addMeshObj', {
         mesh: mesh,
