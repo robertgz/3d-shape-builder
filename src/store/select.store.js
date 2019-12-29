@@ -1,5 +1,11 @@
 import * as THREE from 'three';
 
+const data = {
+  raycaster: new THREE.Raycaster(),
+  mouseUnwatch: null,
+  selected: new Map(), // format { id: Object3D }
+};
+
 const selection = {
   namespaced: true,
   modules: {},
