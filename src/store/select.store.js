@@ -79,6 +79,39 @@ const selection = {
   },
 
   mutations: {
+
+    addToSelection(state, { object }) {
+      
+      state.selectedSet.add(object.id);
+
+      object.getObjectByName('selected').visible = true;
+
+      data.selected.set(object.id, object);
+
+    },
+
+    removeFromSelection(state, { object }) {
+
+      state.selectedSet.delete(object.id);
+
+      object.getObjectByName('selected').visible = false;
+
+      data.selected.delete(object.id);
+
+    },
+    
+    clearSelection(state) {
+
+      state.selectedSet.clear();
+
+      data.selected.forEach(object => {
+        object.getObjectByName('selected').visible = false;
+      });
+
+      data.selected.clear();
+
+    },
+
   },
 };
 
