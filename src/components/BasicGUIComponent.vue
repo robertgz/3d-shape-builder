@@ -87,16 +87,16 @@ export default {
 
   computed: {
     meshIds () {
-      return this.$store.getters['meshes/getMeshIds'];
+      return this.$store.getters['objects/getMeshIds'];
     },
     xPosition () {
-      return this.$store.getters['meshes/getMeshSizeByID']( this.selected ).x;
+      return this.$store.getters['objects/getMeshSizeByID']( this.selected ).x;
     },
 
     x_position: {
       get() {
         if ( this.selected ) {         
-          return this.$store.getters['meshes/getMeshSizeByID']( this.selected ).x;
+          return this.$store.getters['objects/getMeshSizeByID']( this.selected ).x;
         }
 
         return '';
@@ -109,7 +109,7 @@ export default {
              amount: value,
           };
 
-          this.$store.dispatch('meshes/setMeshPosition', options);
+          this.$store.dispatch('objects/setMeshPosition', options);
         }
 
       }
@@ -128,26 +128,26 @@ export default {
 
   methods: {
     addBox: function (event) {
-      this.$store.dispatch('meshes/addBox');
+      this.$store.dispatch('objects/addBox');
     },
 
     deleteMesh: function (event) {
 
-      this.$store.dispatch('meshes/deleteMesh', { id: this.selected });
+      this.$store.dispatch('objects/deleteMesh', { id: this.selected });
 
       this.selected = '';
     },
 
     getMeshSize: function (event) {
       if ( this.selected ) {
-        let size = this.$store.getters['meshes/getMeshSizeByID']( this.selected );
+        let size = this.$store.getters['objects/getMeshSizeByID']( this.selected );
         console.log('size: ', size);
       }
     },
 
     getMeshPosition: function (event) {
       if ( this.selected ) {
-        let size = this.$store.getters['meshes/getMeshPositionByID']( this.selected );
+        let size = this.$store.getters['objects/getMeshPositionByID']( this.selected );
         console.log('size: ', size);
       }
     },

@@ -7,7 +7,7 @@ const materials = {
   selected: null,
 };
 
-const meshes = {
+const objects = {
   namespaced: true,
   state: {
     meshObjs: {},
@@ -140,4 +140,4 @@ const meshes = {
 
 }
 
-export default meshes;
+export default objects;
