@@ -10,8 +10,8 @@
       </div>
 
       <div class="" id="">
-        <label for="meshSelect">choose a mesh:</label>
-        <select name="abc" size="5" class="" id="meshSelect" v-model="selected">
+        <label for="objectSelect">Select objects:</label>
+        <select name="abc" size="5" class="" id="objectSelect" v-model.number="selected" multiple>
           <option v-for="item in meshIds" v-bind:key="item" v-bind:value="item">
             {{ item }}
           </option >
@@ -255,7 +255,7 @@ export default {
   }
 
   /* .sel1 { */
-  #meshSelect {
+  #objectSelect {
     /* z-index: 2; */
     width: 100%;
     /* height: 100px; */
