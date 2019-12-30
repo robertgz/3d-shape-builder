@@ -136,16 +136,26 @@ export default {
 
     x_position: {
       get() {
-        if ( this.selected ) {         
-          return this.$store.getters['objects/getMeshSizeByID']( this.selected ).x;
+
+        if ( this.oneSelected ) {
+
+          let amount = this.$store.getters['objects/getMeshPositionByID']( this.selected[0] ).x;          
+          return parseFloat(amount).toFixed(2);
+
+        } else {
+
+          return undefined;
+
         }
 
-        return '';
       },
+
       set (value) {
-        if ( this.selected ) {
+
+        if ( this.oneSelected ) {
+
           let options = {
-             id: this.selected,
+             id: this.selected[0],
              axis: 'x',
              amount: value,
           };
