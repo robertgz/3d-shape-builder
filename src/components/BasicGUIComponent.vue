@@ -192,15 +192,15 @@ export default {
     },
 
     getMeshSize: function (event) {
-      if ( this.selected ) {
-        let size = this.$store.getters['objects/getMeshSizeByID']( this.selected );
+      if ( this.oneSelected ) {
+        let size = this.$store.getters['objects/getMeshSizeByID']( this.selected[0] );
         console.log('size: ', size);
       }
     },
 
     getMeshPosition: function (event) {
-      if ( this.selected ) {
-        let size = this.$store.getters['objects/getMeshPositionByID']( this.selected );
+      if ( this.oneSelected ) {
+        let size = this.$store.getters['objects/getMeshPositionByID']( this.selected[0] );
         console.log('size: ', size);
       }
     },
