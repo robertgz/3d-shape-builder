@@ -52,10 +52,14 @@
 
     <div id="sPanel">
       <div>Location</div>
+
       <div class="axis-holder">
         <label for="xPos" class="axis">X</label>
-        <input v-model="x_position" type=number id="xPos" name="x" class="axis">
-      </div>      
+        <input v-model="x_position" type=number 
+          id="xPos" name="x" class="axis"
+          :step=stepAmount 
+          :disabled=isDisabled>
+      </div>
 
       <div class="axis-holder">
         <label for="yPos" class="axis">Y</label>
@@ -81,6 +85,7 @@ export default {
 
   data () {
     return {
+      stepAmount: 0.25,
     }
   },
 
@@ -96,7 +101,7 @@ export default {
     },
     
     isDisabled (){
-      
+
       if (this.oneSelected) {
         return false;
       } else {
