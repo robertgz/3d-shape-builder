@@ -78,7 +78,7 @@
 <script>
 
 export default {
-  // inject: { util: 'util', getScene: 'getScene' },
+  // inject: { },
 
   props: {
   },
