@@ -16,7 +16,7 @@ const objects = {
 
   getters: {
 
-    getMeshIds: (state) => {
+    getObjectIds: (state) => {
       return Object.keys(state.meshObjs);
     },
 
@@ -24,11 +24,11 @@ const objects = {
       return state.meshObjs[id];
     },
 
-    getMeshSizeByID: (state) => (id) => {
+    getObjectSizeByID: (state) => (id) => {
       return { ...state.meshObjs[id].scale };
     },
 
-    getMeshPositionByID: (state) => (id) => {
+    getObjectPositionByID: (state) => (id) => {
       return { ...state.meshObjs[id].position };
     },
 
@@ -91,7 +91,7 @@ const objects = {
 
     },
 
-    deleteMesh( context, { id } ) {
+    deleteObjectsByIds( context, { id } ) {
       let objectId = parseInt( id, 10 );
 
       let scene = context.rootGetters['scene/getScene'];
@@ -103,7 +103,7 @@ const objects = {
       context.commit('deleteMeshObj', { id: id });
     },
 
-    setMeshPosition( context, { id, axis, amount } ) {
+    setObjectPosition( context, { id, axis, amount } ) {
       let scene = context.rootGetters['scene/getScene'];
       let meshObject = scene.getObjectById( parseInt( id, 10 ) );
 

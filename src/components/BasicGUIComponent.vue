@@ -12,26 +12,26 @@
       <div class="" id="">
         <label for="objectSelect">Select objects:</label>
         <select name="abc" size="5" class="" id="objectSelect" v-model.number="selected" multiple>
-          <option v-for="item in meshIds" v-bind:key="item" v-bind:value="item">
+          <option v-for="item in objectIds" v-bind:key="item" v-bind:value="item">
             {{ item }}
           </option >
         </select>
       </div>
 
       <button 
-        v-on:click="getMeshSize" 
+        v-on:click="getObjectSize" 
         class="pure-button panelBtn">
          Log size
       </button>      
 
       <button 
-        v-on:click="getMeshPosition" 
+        v-on:click="getObjectPosition" 
         class="pure-button panelBtn">
          Log position
       </button>      
 
       <button 
-        v-on:click="deleteMesh" 
+        v-on:click="deleteObjects" 
         class="pure-button panelBtn">
          Delete
       </button>
@@ -110,8 +110,8 @@ export default {
 
     },
 
-    meshIds () {
-      return this.$store.getters['objects/getMeshIds'];
+    objectIds () {
+      return this.$store.getters['objects/getObjectIds'];
     },
 
     selected: {
@@ -141,7 +141,7 @@ export default {
 
         if ( this.oneSelected ) {
 
-          let amount = this.$store.getters['objects/getMeshPositionByID']( this.selected[0] ).x;          
+          let amount = this.$store.getters['objects/getObjectPositionByID']( this.selected[0] ).x;          
           return parseFloat(amount).toFixed(2);
 
         } else {
@@ -162,7 +162,7 @@ export default {
              amount: value,
           };
 
-          this.$store.dispatch('objects/setMeshPosition', options);
+          this.$store.dispatch('objects/setObjectPosition', options);
         }
 
       }
@@ -184,23 +184,23 @@ export default {
       this.$store.dispatch('objects/addBox');
     },
 
-    deleteMesh: function (event) {
+    deleteObjects: function (event) {
 
-      this.$store.dispatch('objects/deleteMesh', { id: this.selected });
+      this.$store.dispatch('objects/deleteObjectsByIds', { id: this.selected });
 
       this.selected = '';
     },
 
-    getMeshSize: function (event) {
+    getObjectSize: function (event) {
       if ( this.oneSelected ) {
-        let size = this.$store.getters['objects/getMeshSizeByID']( this.selected[0] );
+        let size = this.$store.getters['objects/getObjectSizeByID']( this.selected[0] );
         console.log('size: ', size);
       }
     },
 
-    getMeshPosition: function (event) {
+    getObjectPosition: function (event) {
       if ( this.oneSelected ) {
-        let size = this.$store.getters['objects/getMeshPositionByID']( this.selected[0] );
+        let size = this.$store.getters['objects/getObjectPositionByID']( this.selected[0] );
         console.log('size: ', size);
       }
     },
