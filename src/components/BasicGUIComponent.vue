@@ -85,6 +85,26 @@ export default {
   },
 
   computed: {
+    oneSelected () {
+
+      if (this.selected.length === 1) {
+        return true;
+      } else {
+        return false;
+      }
+
+    },
+    
+    isDisabled (){
+      
+      if (this.oneSelected) {
+        return false;
+      } else {
+        return true;
+      }
+
+    },
+
     meshIds () {
       return this.$store.getters['objects/getMeshIds'];
     },
