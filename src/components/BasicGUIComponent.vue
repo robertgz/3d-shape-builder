@@ -81,7 +81,6 @@ export default {
 
   data () {
     return {
-      selected: '',
     }
   },
 
@@ -91,6 +90,28 @@ export default {
     },
     xPosition () {
       return this.$store.getters['objects/getMeshSizeByID']( this.selected ).x;
+    },
+
+    selected: {
+      get() {
+        let selected = this.$store.getters['select/getSelected']
+        // console.log('selected_get', selected);
+
+        if (selected.length > 0) {
+          return Array.from(selected);
+        } else {
+          return [];
+        }
+      },
+
+      set(newSelected) {
+        // console.log('selected_set.newSelected', newSelected);
+
+        this.$store.dispatch('select/selectMultipleByIds', {
+          selected: newSelected
+        });
+
+      },      
     },
 
     x_position: {
