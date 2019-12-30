@@ -136,9 +136,9 @@ const objects = {
     },
 
     setMeshObjPosition(state, { id, axis, amount }) {
-      state.meshObjs[id].position[axis] = parseInt( amount, 10 );
+      state.meshObjs[id].position[axis] = parseFloat(amount);
 
-      // state.meshObjs[id].scale[axis] = parseInt( amount, 10 );
+      // state.meshObjs[id].scale[axis] = parseFloat(amount);
     },
 
     deleteMeshObj(state, { id }) {
