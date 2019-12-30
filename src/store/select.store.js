@@ -11,13 +11,18 @@ const selection = {
   modules: {},
 
   state: {
-    selectedSet: new Set(), // list of Object3D.ids
+    selectedArr: [],
     selectionActive: false,
   },
 
   getters: {
     getSelectionStatus(state) {
       return state.selectionActive;
+    },
+
+    getSelected(state, payload) {
+      // console.log('state/getSelected', state.selectedArr);
+      return state.selectedArr;
     },
   },
 
@@ -43,19 +48,36 @@ const selection = {
 
     doSelecting(context, { intersectedObjects }) {
 
-      if (intersectedObjects.length > 0) {
+      context.commit('clearSelection');
 
-        context.commit('clearSelection');
+      if (intersectedObjects.length > 0) {
 
         context.commit('addToSelection', {
           object: intersectedObjects[ 0 ].object.parent,
         });
 
-      } else if (intersectedObjects.length === 0) {
-
-        context.commit('clearSelection');
-
       }
+
+    },
+
+    selectMultipleByIds(context, { selected }) {
+      let scene = context.rootGetters['scene/getScene'];
+
+      // console.log('selectedArr', selected);
+
+      context.commit('clearSelection');
+
+      selected.forEach( selectedId => {
+        // console.log('selectMultiple.selectedObject', selectedId);
+
+        let selectedObject = scene.getObjectById(selectedId);
+
+        // console.log('selectMultiple.selectedObject', selectedObject);
+
+        context.commit('addToSelection', {
+          object: selectedObject,
+        });
+      });
 
     },
 
@@ -93,34 +115,31 @@ const selection = {
   mutations: {
 
     addToSelection(state, { object }) {
-      
-      state.selectedSet.add(object.id);
-
       object.getObjectByName('selected').visible = true;
 
       data.selected.set(object.id, object);
+      state.selectedArr = Array.from(data.selected.keys());
 
     },
 
     removeFromSelection(state, { object }) {
 
-      state.selectedSet.delete(object.id);
-
       object.getObjectByName('selected').visible = false;
 
       data.selected.delete(object.id);
+      state.selectedArr = Array.from(data.selected.keys());
 
     },
 
     clearSelection(state) {
-
-      state.selectedSet.clear();
 
       data.selected.forEach(object => {
         object.getObjectByName('selected').visible = false;
       });
 
       data.selected.clear();
+
+      state.selectedArr = [];
 
     },
 
