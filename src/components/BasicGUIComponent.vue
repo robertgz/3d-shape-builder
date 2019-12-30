@@ -113,9 +113,6 @@ export default {
     meshIds () {
       return this.$store.getters['objects/getMeshIds'];
     },
-    xPosition () {
-      return this.$store.getters['objects/getMeshSizeByID']( this.selected ).x;
-    },
 
     selected: {
       get() {
