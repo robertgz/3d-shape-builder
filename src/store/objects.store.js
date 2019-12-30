@@ -91,16 +91,20 @@ const objects = {
 
     },
 
-    deleteObjectsByIds( context, { id } ) {
-      let objectId = parseInt( id, 10 );
-
+    deleteObjectsByIds( context, { ids } ) {
       let scene = context.rootGetters['scene/getScene'];
-      let meshObject = scene.getObjectById( objectId );
 
-      scene.remove( meshObject );    
-      // meshObject.dispose();
-    
-      context.commit('deleteMeshObj', { id: id });
+      ids.forEach(id => {
+        let objectId = parseInt( id, 10 );
+
+        let meshObject = scene.getObjectById( objectId );
+
+        scene.remove( meshObject );    
+        // meshObject.dispose();
+      
+        context.commit('deleteMeshObj', { id: id });
+      });
+
     },
 
     setObjectPosition( context, { id, axis, amount } ) {

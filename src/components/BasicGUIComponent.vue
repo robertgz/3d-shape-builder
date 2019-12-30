@@ -186,9 +186,9 @@ export default {
 
     deleteObjects: function (event) {
 
-      this.$store.dispatch('objects/deleteObjectsByIds', { id: this.selected });
+      this.$store.dispatch('objects/deleteObjectsByIds', { ids: this.selected });
 
-      this.selected = '';
+      this.selected = [];
     },
 
     getObjectSize: function (event) {
