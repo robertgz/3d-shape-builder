@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-on:keyup.delete="deletePressed">
     <div v-bind:id="canvasID" v-on:click="clicked"></div>
     <StatsComponent 
       v-bind:parentNodeSelector="canvasNodeSelector" 
@@ -85,6 +85,10 @@ export default {
         this.$store.dispatch('mouse/clicked', options);
       }
 
+    },
+
+    deletePressed: function(event) {
+      this.$store.dispatch('objects/deleteSelected');
     },
 
   }
