@@ -37,16 +37,11 @@
       </button>
 
       <button 
-        v-on:click="selectOn" 
+        v-on:click="toggleSelect" 
         class="pure-button panelBtn">
-         Select:on
+         Select: {{selectButtonStatus}}
       </button>
 
-      <button 
-        v-on:click="selectOff" 
-        class="pure-button panelBtn">
-         Select:off
-      </button>
     </div>
 
 
@@ -86,6 +81,7 @@ export default {
   data () {
     return {
       stepAmount: 0.25,
+      selectEnabled: false,
     }
   },
 
@@ -134,6 +130,14 @@ export default {
         });
 
       },      
+    },
+
+    selectButtonStatus () {
+      if (this.selectEnabled) {
+        return 'on'
+      } else {
+        return 'off';
+      }
     },
 
     x_position: {
@@ -204,12 +208,16 @@ export default {
       }
     },
 
-    selectOn: function (event) {
-      this.$store.dispatch('select/enableSelect');
-    },
+    toggleSelect: function (event) {
 
-    selectOff: function (event) {
-      this.$store.dispatch('select/disableSelect');
+      this.selectEnabled = !this.selectEnabled;
+
+      if (this.selectEnabled) {
+        this.$store.dispatch('select/enableSelect');
+      } else {
+        this.$store.dispatch('select/disableSelect');
+      }
+
     },
     
   },
