@@ -31,7 +31,7 @@
       </button>      
 
       <button 
-        v-on:click="deleteObjects" 
+        v-on:click="deleteSelected" 
         class="pure-button panelBtn">
          Delete
       </button>
