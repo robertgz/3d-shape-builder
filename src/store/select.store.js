@@ -1,5 +1,14 @@
 import * as THREE from 'three';
 
+function doRayCasting( mouse, camera, scene ) {
+
+  data.raycaster.setFromCamera( mouse, camera );
+  data.raycaster.linePrecision = 0.1;
+
+  return data.raycaster.intersectObjects( scene.children, true );
+
+};
+
 const data = {
   raycaster: new THREE.Raycaster(),
   mouseUnwatch: null,
@@ -29,26 +38,40 @@ const selection = {
   actions: {
     setup(context, payload) {},
 
-    doRayCasting(context) {
-
-      let camera = context.rootGetters['scene/getCamera'];
-      let scene = context.rootGetters['scene/getScene'];
-      let mouse = context.rootGetters['mouse/locationVector'];
-
-      data.raycaster.setFromCamera( mouse, camera );
-      data.raycaster.linePrecision = 0.1;
-
-      let intersects = data.raycaster.intersectObjects( scene.children, true );
-
-      context.dispatch('doSelecting', {
-        intersectedObjects: intersects
-      });
-      
+    mouseClicked(context, payload) {
+      if (context.rootGetters['select/getSelectionStatus']) {
+        context.dispatch('select', payload);
+      }
     },
 
-    doSelecting(context, { intersectedObjects }) {
+    // doRayCasting(context) {
 
-      context.commit('clearSelection');
+    //   let camera = context.rootGetters['scene/getCamera'];
+    //   let scene = context.rootGetters['scene/getScene'];
+    //   let mouse = context.rootGetters['mouse/locationVector'];
+
+    //   data.raycaster.setFromCamera( mouse, camera );
+    //   data.raycaster.linePrecision = 0.1;
+
+    //   let intersects = data.raycaster.intersectObjects( scene.children, true );
+
+    //   context.dispatch('doSelecting', {
+    //     intersectedObjects: intersects
+    //   });
+      
+    // },
+
+    select(context, { mouse, ctrlKey, shiftKey }) {
+
+      let intersectedObjects = doRayCasting(
+        new THREE.Vector2( mouse.x, mouse.y ),
+        context.rootGetters['scene/getCamera'],
+        context.rootGetters['scene/getScene'],
+      );
+
+      if ( !(ctrlKey || shiftKey) ) {
+        context.commit('clearSelection');
+      }
 
       if (intersectedObjects.length > 0) {
 
@@ -59,6 +82,20 @@ const selection = {
       }
 
     },
+
+    // doSelecting(context, { intersectedObjects }) {
+
+    //   context.commit('clearSelection');
+
+    //   if (intersectedObjects.length > 0) {
+
+    //     context.commit('addToSelection', {
+    //       object: intersectedObjects[ 0 ].object.parent,
+    //     });
+
+    //   }
+
+    // },
 
     selectMultipleByIds(context, { selected }) {
       let scene = context.rootGetters['scene/getScene'];
@@ -85,16 +122,16 @@ const selection = {
       // console.log('enableSelect');
 
       context.state.selectionActive = true;
-      context.dispatch('mouse/enableListening', null, { root: true });
+      // context.dispatch('mouse/enableListening', null, { root: true });
 
-      data.mouseUnwatch = this.watch(function () {
-          return context.rootGetters['mouse/location'];
-        }, 
-        function (newVal, oldVal) {
-          context.dispatch('doRayCasting');
-        },
-        { deep: true }
-      );
+      // data.mouseUnwatch = this.watch(function () {
+      //     return context.rootGetters['mouse/location'];
+      //   }, 
+      //   function (newVal, oldVal) {
+      //     context.dispatch('doRayCasting');
+      //   },
+      //   { deep: true }
+      // );
 
     },
 
@@ -102,11 +139,11 @@ const selection = {
       // console.log('disableSelect');
 
       context.state.selectionActive = false;
-      context.dispatch('mouse/disableListening', null, { root: true });
+      // context.dispatch('mouse/disableListening', null, { root: true });
 
-      if ( context.state.mouseUnwatch ) {
-        data.mouseUnwatch(); 
-      }
+      // if ( context.state.mouseUnwatch ) {
+      //   data.mouseUnwatch(); 
+      // }
 
     },
 
