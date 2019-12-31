@@ -107,6 +107,24 @@ const objects = {
 
     },
 
+    deleteSelected(context) {
+      let selected = context.rootGetters['select/getSelected'];
+      
+      // console.log('objects/deleteSelected', selected);
+
+      context.commit(
+        'select/clearSelection',
+        null, 
+        { root: true }
+      );
+      
+      context.dispatch(
+        'objects/deleteObjectsByIds', 
+        { ids: selected }, 
+        { root: true }
+      );
+    },
+
     setObjectPosition( context, { id, axis, amount } ) {
       let scene = context.rootGetters['scene/getScene'];
       let meshObject = scene.getObjectById( parseInt( id, 10 ) );
