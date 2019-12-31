@@ -184,11 +184,10 @@ export default {
       this.$store.dispatch('objects/addBox');
     },
 
-    deleteObjects: function (event) {
+    deleteSelected: function (event) {
 
-      this.$store.dispatch('objects/deleteObjectsByIds', { ids: this.selected });
+      this.$store.dispatch('objects/deleteSelected');
 
-      this.selected = [];
     },
 
     getObjectSize: function (event) {
