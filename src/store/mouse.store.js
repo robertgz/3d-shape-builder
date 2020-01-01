@@ -15,7 +15,7 @@ const mouse = {
     },
 
     location(state) {
-      return state.mouse;
+      return { x: state.mouse.x, y: state.mouse.y };
     },
 
     locationVector(state) {
