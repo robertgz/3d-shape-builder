@@ -59,6 +59,7 @@ export default [{
     'https://unpkg.com/three@0.111.0/build/three.module.js',
     'https://unpkg.com/three@0.111.0/examples/jsm/libs/stats.module.js',
     'https://unpkg.com/three@0.111.0/examples/jsm/controls/OrbitControls.js',
+    'https://unpkg.com/three@0.111.0/examples/jsm/controls/TransformControls.js',
     'https://unpkg.com/dat.gui@0.7.6/build/dat.gui.module.js',
     'https://unpkg.com/vue@2.6.10/dist/vue.esm.browser.js',
     'https://unpkg.com/vuex@3.1.2/dist/vuex.esm.browser.js',
