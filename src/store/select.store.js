@@ -29,7 +29,7 @@ const selection = {
       return state.selectionActive;
     },
 
-    getSelected(state, payload) {
+    getSelected(state) {
       // console.log('state/getSelected', state.selectedArr);
       return state.selectedArr;
     },
