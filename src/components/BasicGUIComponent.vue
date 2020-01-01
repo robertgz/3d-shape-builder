@@ -203,8 +203,8 @@ export default {
 
     getObjectPosition: function (event) {
       if ( this.oneSelected ) {
-        let size = this.$store.getters['objects/getObjectPositionByID']( this.selected[0] );
-        console.log('size: ', size);
+        let position = this.$store.getters['objects/getObjectPositionByID']( this.selected[0] );
+        console.log('position: ', position);
       }
     },
 
