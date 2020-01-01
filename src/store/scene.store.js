@@ -6,6 +6,7 @@ const graph = {
   scene: null,
   selected: null,
   controls: null,
+  helpers: null,
   renderer: null,
   camera: null,
   renderList: [],
@@ -20,6 +21,14 @@ const scene = {
   getters: {
     getScene (state) {
       return graph.scene;
+    },
+
+    getControlsNode (state) {
+      return graph.controls;
+    },
+
+    getHelpersNode (state) {
+      return graph.helpers;
     },
     
     getRenderer (state) {
@@ -80,9 +89,13 @@ const scene = {
 
       graph.scene = new THREE.Group();
       graph.selected = new THREE.Group();
+      graph.controls = new THREE.Group();
+      graph.helpers = new THREE.Group();
       
       graph.root.add( graph.scene );
       graph.root.add( graph.selected );
+      graph.root.add( graph.controls );
+      graph.root.add( graph.helpers );
     },
 
     setupCamera (state, payload) {
