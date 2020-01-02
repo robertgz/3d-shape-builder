@@ -50,9 +50,6 @@ export default {
         return this.$store.getters['scene/getCamera'];
 
       },
-      // listenForClick () {
-      //   return this.$store.getters['mouse/listen'];
-      // }      
   },
 
   created: function() {
@@ -75,21 +72,17 @@ export default {
     init: function() {  },
 
     clicked: function(event) {
-      // if (this.listenForClick) {
 
-        let options = {
-          x:   ( event.clientX / window.innerWidth )  * 2 - 1,
-          y: - ( event.clientY / window.innerHeight ) * 2 + 1,
-        };
+      let options = {
+        x:   ( event.clientX / window.innerWidth )  * 2 - 1,
+        y: - ( event.clientY / window.innerHeight ) * 2 + 1,
+      };
 
-        // this.$store.dispatch('mouse/clicked', options);
-        // console.log('SceneRoot:clicked', event)
-        this.$store.dispatch('select/mouseClicked', { 
-          mouse: options,
-          ctrlKey: event.ctrlKey,
-          shiftKey: event.shiftKey,
-        });
-      // }
+      this.$store.dispatch('select/mouseClicked', { 
+        mouse: options,
+        ctrlKey: event.ctrlKey,
+        shiftKey: event.shiftKey,
+      });
 
     },
 
