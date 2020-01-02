@@ -128,19 +128,20 @@ const objects = {
     setObjectPosition( context, { id, axis, amount } ) {
       let scene = context.rootGetters['scene/getScene'];
       let meshObject = scene.getObjectById( parseInt( id, 10 ) );
+      let axisPosition = parseFloat(amount);
 
       if (axis === 'x') {
-        meshObject.position.setX(amount);
+        meshObject.position.setX(axisPosition);
       } else if (axis === 'y') {
-        meshObject.position.setY(amount);
+        meshObject.position.setY(axisPosition);
       } else if (axis === 'z') {
-        meshObject.position.setZ(amount);
+        meshObject.position.setZ(axisPosition);
       }
 
       context.commit('setMeshObjPosition', {
         id: id,
         axis: axis,
-        amount: amount,
+        amount: axisPosition,
       });
 
       context.dispatch(
