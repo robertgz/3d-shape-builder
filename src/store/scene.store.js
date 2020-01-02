@@ -91,6 +91,9 @@ const scene = {
       graph.selected = new THREE.Group();
       graph.controls = new THREE.Group();
       graph.helpers = new THREE.Group();
+
+      graph.controls.name = 'ControlsParent';
+      graph.helpers.name = 'HelpersParent';
       
       graph.root.add( graph.scene );
       graph.root.add( graph.selected );
