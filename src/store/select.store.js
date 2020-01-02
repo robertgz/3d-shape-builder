@@ -83,20 +83,6 @@ const selection = {
 
     },
 
-    // doSelecting(context, { intersectedObjects }) {
-
-    //   context.commit('clearSelection');
-
-    //   if (intersectedObjects.length > 0) {
-
-    //     context.commit('addToSelection', {
-    //       object: intersectedObjects[ 0 ].object.parent,
-    //     });
-
-    //   }
-
-    // },
-
     selectMultipleByIds(context, { selected }) {
       let scene = context.rootGetters['scene/getScene'];
 
