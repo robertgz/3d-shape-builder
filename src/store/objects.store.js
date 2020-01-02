@@ -142,6 +142,13 @@ const objects = {
         axis: axis,
         amount: amount,
       });
+
+      context.dispatch(
+        'select/updateSelectedCentroid', 
+        null,
+        { root: true }
+      );
+
     },
   },
 
