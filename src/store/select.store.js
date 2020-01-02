@@ -9,6 +9,30 @@ function doRayCasting( mouse, camera, scene ) {
 
 };
 
+function getCentroid( objectIdList ) {
+
+  if (objectIdList.length < 1) { return undefined; };
+
+  let count = objectIdList.length;
+  let sums = { x: 0, y: 0, z: 0 };
+
+  objectIdList.forEach( objectId => {
+    let pos = data.selected.get(objectId).position;
+
+    sums.x += parseFloat(pos.x);
+    sums.y += parseFloat(pos.y);
+    sums.z += parseFloat(pos.z);
+  });
+
+  let centroid = {
+    x: sums.x/count, 
+    y: sums.y/count, 
+    z: sums.z/count 
+  };
+
+  return centroid;
+};
+
 const data = {
   raycaster: new THREE.Raycaster(),
   mouseUnwatch: null,
@@ -22,6 +46,7 @@ const selection = {
   state: {
     selectedArr: [],
     selectionActive: false,
+    selectionCentroid: { x: 0, y: 0, z: 0 },
   },
 
   getters: {
@@ -33,6 +58,10 @@ const selection = {
       // console.log('state/getSelected', state.selectedArr);
       return state.selectedArr;
     },
+
+    getSelectionCentroid(state) {
+      return state.selectionCentroid;
+    },
   },
 
   actions: {
@@ -42,24 +71,30 @@ const selection = {
       if (context.rootGetters['select/getSelectionStatus']) {
         context.dispatch('select', payload);
       }
+        
+      context.dispatch('updateSelectedCentroid');
     },
 
-    // doRayCasting(context) {
+    updateSelectedCentroid(context) {
+      let selected = context.rootGetters['select/getSelected'];
+      // console.log('getSelectedCentroid:selected', selected);
 
-    //   let camera = context.rootGetters['scene/getCamera'];
-    //   let scene = context.rootGetters['scene/getScene'];
-    //   let mouse = context.rootGetters['mouse/locationVector'];
-
-    //   data.raycaster.setFromCamera( mouse, camera );
-    //   data.raycaster.linePrecision = 0.1;
-
-    //   let intersects = data.raycaster.intersectObjects( scene.children, true );
-
-    //   context.dispatch('doSelecting', {
-    //     intersectedObjects: intersects
-    //   });
+      if (selected.length < 1) {
+        return;
+      }
       
-    // },
+      let centroid = getCentroid(selected);
+
+      if (centroid) {
+
+        context.commit(
+          'select/setSelectedCentroid',
+          { centroid: centroid },
+          { root: true }
+        );
+
+      }
+    },
 
     select(context, { mouse, ctrlKey, shiftKey }) {
 
@@ -108,6 +143,8 @@ const selection = {
           object: selectedObject,
         });
       });
+
+      context.dispatch('updateSelectedCentroid');
 
     },
 
@@ -190,6 +227,12 @@ const selection = {
       data.selected.clear();
 
       state.selectedArr = [];
+
+    },
+
+    setSelectedCentroid(state, payload) {
+      
+      state.selectionCentroid = payload.centroid;
 
     },
 
