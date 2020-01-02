@@ -63,20 +63,27 @@ const selection = {
 
     select(context, { mouse, ctrlKey, shiftKey }) {
 
+      let toggleSelection = ctrlKey || shiftKey;
+
       let intersectedObjects = doRayCasting(
         new THREE.Vector2( mouse.x, mouse.y ),
         context.rootGetters['scene/getCamera'],
         context.rootGetters['scene/getScene'],
       );
 
-      if ( !(ctrlKey || shiftKey) ) {
+      if ( !toggleSelection ) {
         context.commit('clearSelection');
       }
 
       if (intersectedObjects.length > 0) {
 
-        context.commit('addToSelection', {
+        // context.commit('addToSelection', {
+        //   object: intersectedObjects[ 0 ].object.parent,
+        // });
+
+        context.commit('updateSelection', {
           object: intersectedObjects[ 0 ].object.parent,
+          toggle: toggleSelection,
         });
 
       }
@@ -136,6 +143,26 @@ const selection = {
   },
 
   mutations: {
+
+    updateSelection(state, { object, toggle }) {
+      let visibleStatus = object.getObjectByName('selected').visible;
+
+      if (toggle) {
+        visibleStatus = !visibleStatus;
+      } else {
+        visibleStatus = true;
+      }
+      object.getObjectByName('selected').visible = visibleStatus;
+
+      if (visibleStatus) {
+        data.selected.set(object.id, object);
+      } else {
+        data.selected.delete(object.id);
+      }
+
+      state.selectedArr = Array.from(data.selected.keys());
+
+    },
 
     addToSelection(state, { object }) {
       object.getObjectByName('selected').visible = true;
