@@ -163,7 +163,7 @@ export default {
           let options = {
              id: this.selected[0],
              axis: 'x',
-             amount: value,
+             amount: parseFloat(value),
           };
 
           this.$store.dispatch('objects/setObjectPosition', options);
