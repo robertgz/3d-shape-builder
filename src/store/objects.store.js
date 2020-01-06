@@ -154,6 +154,14 @@ const objects = {
   },
 
   mutations: {
+    updateObjectPositionFromGraph(state, { object } ){
+
+      Vue.set(state.meshObjs, object.id, {
+        position: {...object.position},
+      });
+
+    },
+
     addMeshObj(state, { id, object, type }) {
 
       Vue.set(state.meshObjs, id, { // object.id does not work, not sure why?
