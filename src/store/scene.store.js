@@ -43,6 +43,19 @@ const scene = {
       return graph.sceneRootNode;
     },
 
+    findObjectFromRootByID: (state) => (id) => {
+      return graph.root.getObjectById( id );
+    },
+
+    findObjectsFromRootByIDs: (state) => (ids) => {      
+      let objectList = [];
+      ids.forEach( id => {
+        objectList.push( graph.root.getObjectById( id ) )
+      });
+
+      return objectList;
+    },
+
   },
 
   actions: {
@@ -59,7 +72,6 @@ const scene = {
     addSceneToCanvas(context, payload) {
       graph.sceneRootNode = document.querySelector( payload.canvas );
       graph.sceneRootNode.appendChild( graph.renderer.domElement );
-      console.log('scene added');
     },
 
     startRendering(context) {
@@ -92,6 +104,8 @@ const scene = {
       graph.controls = new THREE.Group();
       graph.helpers = new THREE.Group();
 
+      graph.root.name = 'RootScene';
+      graph.scene.name = 'Working Scene';
       graph.controls.name = 'ControlsParent';
       graph.helpers.name = 'HelpersParent';
       
