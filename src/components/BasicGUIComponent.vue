@@ -42,6 +42,7 @@
          Select: {{selectButtonStatus}}
       </button>
 
+      <TransformButtonComponent/>
     </div>
 
 
@@ -71,8 +72,12 @@
 </template>
 
 <script>
+import TransformButtonComponent from './TransformButtonComponent.vue';
 
 export default {
+  components: {
+    TransformButtonComponent,
+  },
   // inject: { },
 
   props: {

@@ -1,19 +1,27 @@
-import * as THREE from 'three';
-
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
 
 const data = {
   orbitControl: null,
-  transformControl: null,
+  // dragControl: null,
 };
 
 const controls = {
   namespaced: true,
   modules: {    
   },
-  state: {},
-  getters: {},
+  state: {
+    orbitControlActive: true,
+    transformControlActive: false,
+    // dragControlActive: false,
+  },
+  getters: {
+    isTransformControlActive(state) {
+      return state.transformControlActive;
+    },
+    isOrbitControlActive(state) {
+      return state.orbitControlActive;
+    },
+  },
   actions: {
 
     setup(context) {
@@ -31,35 +39,27 @@ const controls = {
         LEFT: 0,
         MIDDLE: 1,
         RIGHT: 2
-      };
+      };     
 
-      data.transformControl = new TransformControls( 
-        camera,
-        renderer.domElement
-      );
-    },
-    
-    enableTransform(context, { selected } ) {
-      let scene = context.rootGetters['scene/getScene'];
-      let object = scene.getObjectById( selected );
-
-      console.log('controls/enableTransform', object);
-      
-      data.transformControl.attach(object);
-      
-      console.log('data.transformControls', data.transformControl);
-
-      data.transformControl.enabled = true;
-
-      scene.add(data.transformControl);
-
-    },
-    disableTransform(context) {
-      data.transformControl.detach();
     },
 
   },
-  mutations: {},
+  mutations: {
+
+    setTransformControlActiveStatus(state, { status }) {
+
+      state.transformControlActive = status;
+
+    },
+
+    setOrbitControlActiveStatus(state, { status }) {
+      
+      state.orbitControlActive = status;
+      data.orbitControl.enabled = status;
+
+    },
+
+  },
 }
 
 export default controls;
