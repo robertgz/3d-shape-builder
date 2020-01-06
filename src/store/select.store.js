@@ -17,7 +17,7 @@ function getCentroid( objectIdList ) {
   let sums = { x: 0, y: 0, z: 0 };
 
   objectIdList.forEach( objectId => {
-    let pos = data.selected.get(objectId).position;
+    let pos = data.selected.get(objectId).getWorldPosition();
 
     sums.x += parseFloat(pos.x);
     sums.y += parseFloat(pos.y);
@@ -56,7 +56,7 @@ const selection = {
 
     getSelected(state) {
       // console.log('state/getSelected', state.selectedArr);
-      return state.selectedArr;
+      return state.selectedArr; // list of object IDs
     },
 
     getSelectionCentroid(state) {
@@ -70,15 +70,14 @@ const selection = {
     mouseClicked(context, payload) {
       if (context.rootGetters['select/getSelectionStatus']) {
         context.dispatch('select', payload);
-      }
         
-      context.dispatch('updateSelectedCentroid');
+        context.dispatch('updateSelectedCentroid');
+      }
     },
 
     updateSelectedCentroid(context) {
       let selected = context.rootGetters['select/getSelected'];
-      // console.log('getSelectedCentroid:selected', selected);
-
+      
       if (selected.length < 1) {
         return;
       }
