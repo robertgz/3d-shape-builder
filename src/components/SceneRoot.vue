@@ -1,6 +1,9 @@
 <template>
 <div v-on:keyup.delete="deletePressed">
-    <div v-bind:id="canvasID" v-on:click="clicked"></div>
+    <MouseClickComponent v-slot:default="{ clicked }" >
+      <div v-bind:id="canvasID" v-on:click="clicked" ></div>
+    </MouseClickComponent>
+
     <StatsComponent 
       v-bind:parentNodeSelector="canvasNodeSelector" 
       v-bind:panel="0"
@@ -14,12 +17,14 @@
 import * as THREE from 'three';
 import StatsComponent from './StatsComponent.vue';
 import OrbitControlsComponent from './OrbitControlsComponent.js';
+import MouseClickComponent from './MouseClickComponent.js';
 import BasicGUIComponent from './BasicGUIComponent.vue';
 
 export default {
   components: {
     StatsComponent,
     OrbitControlsComponent,
+    MouseClickComponent,
     BasicGUIComponent,
   },
 
@@ -66,21 +71,6 @@ export default {
 
   methods: {
     init: function() {  },
-
-    clicked: function(event) {
-
-      let options = {
-        x:   ( event.clientX / window.innerWidth )  * 2 - 1,
-        y: - ( event.clientY / window.innerHeight ) * 2 + 1,
-      };
-
-      this.$store.dispatch('select/mouseClicked', { 
-        mouse: options,
-        ctrlKey: event.ctrlKey,
-        shiftKey: event.shiftKey,
-      });
-
-    },
 
     deletePressed: function(event) {
       this.$store.dispatch('objects/deleteSelected');
