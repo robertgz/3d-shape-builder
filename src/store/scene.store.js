@@ -64,7 +64,7 @@ const scene = {
       context.commit('setupScene');
       context.commit('setupCamera', { width, height });
       context.dispatch('objects/setup', null, { root: true });
-      context.dispatch('controls/setup', null, { root: true });
+      // context.dispatch('controls/setup', null, { root: true });
 
       console.log('setup done');
     },

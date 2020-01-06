@@ -5,11 +5,7 @@
       v-bind:parentNodeSelector="canvasNodeSelector" 
       v-bind:panel="0"
     ></StatsComponent>
-    <!-- <OrbitControlsComponent 
-      v-bind:object="camera" 
-      v-bind:renderer="renderer" 
-      v-bind:properties="{zoomSpeed: 1}"
-    ></OrbitControlsComponent> -->
+    <OrbitControlsComponent/>
     <BasicGUIComponent/>  
 </div>
 </template>
@@ -17,13 +13,13 @@
 <script>
 import * as THREE from 'three';
 import StatsComponent from './StatsComponent.vue';
-// import OrbitControlsComponent from './OrbitControlsComponent.vue';
+import OrbitControlsComponent from './OrbitControlsComponent.js';
 import BasicGUIComponent from './BasicGUIComponent.vue';
 
 export default {
   components: {
     StatsComponent,
-    // OrbitControlsComponent,
+    OrbitControlsComponent,
     BasicGUIComponent,
   },
 
