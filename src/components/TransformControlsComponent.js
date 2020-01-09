@@ -1,4 +1,4 @@
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 import * as THREE from 'three';
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
@@ -15,6 +15,7 @@ export default {
       transformToolEnabled: false,
       transformGizmoShowing: false,
       selectedWatcherFn: null,
+      transformDragging: false,
     }
   },
 
@@ -121,35 +122,39 @@ export default {
     },
 
     transform(event) {
-      // console.log('transform', event);
 
       let objectList = this.getObjectsFromRootByIDs(this.selected);
 
       this.setOrbitControlStatus({ status: !event.value });
+      this.setTransformDraggingStatus({ status: event.value });
 
       if (event.value) {
+
         objectList.forEach( oneObject => {
           this.$options.transformGroup.attach(oneObject);
         });
+
       } else {
+
         objectList.forEach( oneObject => {
           this.scene.attach(oneObject); // change to previous parent
           this.updateObjectPosition({ object: oneObject });
         });
+
       }
-      
-      
+
     },
 
     enableTransform () {
-      // console.log('enableTransform');
+
+      this.updateSelectedCentroid();
 
       this.$options.transformControl.attach(this.$options.transformGroup);
       this.transformGizmoShowing = true;
 
       this.$options.transformControl.addEventListener(
         'dragging-changed', 
-        (event) => { this.transform(event); },
+        this.transform,
         false
       );
 
@@ -163,7 +168,7 @@ export default {
 
       this.$options.transformControl.removeEventListener(
         'dragging-changed', 
-        (event) => { this.transform(event); },
+        this.transform,
         false
       );
 
@@ -172,12 +177,17 @@ export default {
     ...mapMutations('controls', {
       setTransformControlStatus: 'setTransformControlActiveStatus',
       setOrbitControlStatus: 'setOrbitControlActiveStatus',
+      setTransformDraggingStatus: 'setTransformDraggingStatus',
     }),
     
     ...mapMutations('objects', {
       updateObjectPosition: 'updateObjectPositionFromGraph',
     }),
     
+    ...mapActions('select', {
+      updateSelectedCentroid: 'updateSelectedCentroid',
+    }),
+
   },
 
   render() {

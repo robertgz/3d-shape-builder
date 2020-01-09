@@ -7,6 +7,7 @@ const controls = {
   state: {
     orbitControlActive: true,
     transformControlActive: false,
+    transformDragging: false,
     // dragControlActive: false,
   },
 
@@ -14,6 +15,10 @@ const controls = {
     
     isTransformControlActive(state) {
       return state.transformControlActive;
+    },
+
+    isTransformDragging(state) {
+      return state.transformDragging;
     },
 
     isOrbitControlActive(state) {
@@ -28,6 +33,10 @@ const controls = {
 
     setTransformControlActiveStatus(state, { status }) {
       state.transformControlActive = status;
+    },
+
+    setTransformDraggingStatus(state, { status }) {
+      state.transformDragging = status;
     },
 
     setOrbitControlActiveStatus(state, { status }) {      
