@@ -1,15 +1,15 @@
 <template>
   <div>
-    <SceneRoot></SceneRoot>
+    <RootComponent></RootComponent>
   </div>
 </template>
 
 <script>
-import SceneRoot from './SceneRoot.vue';
+import RootComponent from './RootComponent.vue';
 
 export default {
   components: {
-      SceneRoot,
+      RootComponent,
   },
   data () {
     return {
