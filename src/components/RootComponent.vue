@@ -1,20 +1,19 @@
 <template>
   <div v-on:keyup.delete="deletePressed">  
     <ThreeComponent />
-    <!-- <UIComponent/> -->
-    <BasicGUIComponent/>
+    <UIComponent/>
   </div>
 </template>
 
 <script>
 import * as THREE from 'three';
-import BasicGUIComponent from './BasicGUIComponent.vue';
 import ThreeComponent from './ThreeComponent.vue';
+import UIComponent from './UIComponent.vue';
 
 export default {
   components: {
     ThreeComponent,
-    BasicGUIComponent,
+    UIComponent,
   },
 
   provide: function() {
