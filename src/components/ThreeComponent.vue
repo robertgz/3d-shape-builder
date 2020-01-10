@@ -8,7 +8,7 @@
     <SceneComponent />
     <MouseClickComponent />
     <OrbitControlsComponent/>
-    <!-- <TransformControlsComponent/> -->
+    <TransformControlsComponent/>
   </div>
 </template>
 
@@ -20,7 +20,7 @@ import StatsComponent from './StatsComponent.vue';
 import SceneComponent from './SceneComponent.vue';
 import MouseClickComponent from './MouseClickComponent.js';
 import OrbitControlsComponent from './OrbitControlsComponent.js';
-// import TransformControlsComponent from './TransformControlsComponent.js';
+import TransformControlsComponent from './TransformControlsComponent.js';
 
 
 export default {
@@ -30,7 +30,7 @@ export default {
     SceneComponent,
     MouseClickComponent,
     OrbitControlsComponent,
-    // TransformControlsComponent,
+    TransformControlsComponent,
   },
 
   provide: function () {

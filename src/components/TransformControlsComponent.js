@@ -95,16 +95,6 @@ export default {
   },
 
   methods: {
-    toggleTransformFn (event) {
-      console.log(event);
-
-      this.transformToolEnabled = !this.transformToolEnabled;
-      
-      this.setTransformControlStatus({ 
-        status: this.transformToolEnabled
-      });
-
-    },
 
     setTransformPosition(centroid) {
 
@@ -186,9 +176,7 @@ export default {
   },
 
   render() {
-    return this.$scopedSlots.default({
-      toggle: this.toggleTransformFn,
-    })
+    return;
   },
 
 }

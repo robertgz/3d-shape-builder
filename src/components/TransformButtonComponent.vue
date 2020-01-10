@@ -1,25 +1,19 @@
 <template>
-  <TransformControlsComponent 
-    v-slot:default="{ status, toggle }"
-  >
+  <div>
     <button      
       v-on:click="toggle" 
       class="pure-button panelBtn"
     >
       Transform: {{ transformButtonStatus }}
     </button>
-  </TransformControlsComponent>
+  </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
 
-import TransformControlsComponent from './TransformControlsComponent.js';
-
 export default {
-  components: {
-    TransformControlsComponent,
-  },
+  components: {  },
 
   props: {  },
 
@@ -42,7 +36,20 @@ export default {
 
   },
 
-  methods: { },
+  methods: {
+    toggle (event) {
+     
+      this.setTransformControlStatus({ 
+        status: !this.isTransformControlActive
+      });
+
+    },
+
+    ...mapMutations('controls', {
+      setTransformControlStatus: 'setTransformControlActiveStatus',
+    }),
+
+   },
 
 }
 </script>
