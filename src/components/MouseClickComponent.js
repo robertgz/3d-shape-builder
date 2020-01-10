@@ -11,6 +11,8 @@ export default {
     }
   },
 
+  inject: { threeElement: 'threeElement' },
+
   computed: {
 
     ...mapGetters('scene', {
@@ -18,6 +20,16 @@ export default {
     }),
 
   },
+
+  mounted: function () {
+    this.threeElement().addEventListener('click', this.clickEvent, false);
+    this.threeElement().addEventListener('mousedown', this.mouseDown, false);
+  },
+
+  beforeDestroy: function() {
+    this.threeElement().removeEventListener('click', this.clickEvent, false);
+    this.threeElement().removeEventListener('mousedown', this.mouseDown, false);
+   },
 
   methods: {
 
@@ -96,24 +108,21 @@ export default {
     },
 
     addEventListeners() {
-      this.canvas.addEventListener('mousemove', this.mouseMove, false);
-      this.canvas.addEventListener('mouseout', this.mouseOut, false);
-      this.canvas.addEventListener('mouseup', this.mouseUp, false);
+      this.threeElement().addEventListener('mousemove', this.mouseMove, false);
+      this.threeElement().addEventListener('mouseout', this.mouseOut, false);
+      this.threeElement().addEventListener('mouseup', this.mouseUp, false);
     },
 
     removeEventListeners() {
-      this.canvas.removeEventListener('mousemove', this.mouseMove, false);
-      this.canvas.removeEventListener('mouseout', this.mouseOut, false);
-      this.canvas.removeEventListener('mouseup', this.mouseUp, false);
+      this.threeElement().removeEventListener('mousemove', this.mouseMove, false);
+      this.threeElement().removeEventListener('mouseout', this.mouseOut, false);
+      this.threeElement().removeEventListener('mouseup', this.mouseUp, false);
     },
 
   },
 
   render() {
-    return this.$scopedSlots.default({
-      clicked: this.clickEvent,
-      mouseDown: this.mouseDown,
-    })
+    return;
   },
 
 }

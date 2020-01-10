@@ -31,7 +31,7 @@ export default {
     },
   },
   
-  created: function () {
+  mounted: function () {
 
     this.orbitControl = new OrbitControls( 
       this.camera,

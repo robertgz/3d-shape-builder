@@ -34,6 +34,10 @@ const scene = {
     getRenderer (state) {
       return graph.renderer;
     },
+
+    getRendererElement (state) {
+      return graph.renderer.domElement;
+    },
     
     getCamera (state) {
       return graph.camera;
@@ -59,6 +63,17 @@ const scene = {
   },
 
   actions: {
+
+    addSceneData(context, { scene, renderer, camera } ) {
+      graph.renderer = renderer;
+      graph.root = scene;
+      graph.camera = camera;
+      
+      context.commit('setupScene');
+      context.dispatch('objects/setup', null, { root: true });
+      console.log('setup done');
+    },
+/*
     setup3 (context, { width, height }) {
       context.commit('setupRenderer', { width, height });
       context.commit('setupScene');
@@ -88,6 +103,7 @@ const scene = {
       };
       animate();
     },
+    */
   },
 
   mutations: {
@@ -97,7 +113,7 @@ const scene = {
     },
 
     setupScene (state, payload) {
-      graph.root = new THREE.Scene();
+      // graph.root = new THREE.Scene();
 
       graph.scene = new THREE.Group();
       graph.selected = new THREE.Group();

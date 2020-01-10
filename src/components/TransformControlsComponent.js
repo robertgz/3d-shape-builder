@@ -76,8 +76,7 @@ export default {
   },
   
   // Lifecycle Events
-  beforeCreate: function () {  },
-  created: function () {
+  mounted: function () {
 
     this.$options.transformControl = new TransformControls(
       this.camera,
@@ -94,10 +93,6 @@ export default {
     this.controlsNode.add(this.$options.transformGroup);
 
   },
-  beforeMount: function () {},
-  mounted: function () {  },
-  updated: function () {  },
-
 
   methods: {
     toggleTransformFn (event) {
