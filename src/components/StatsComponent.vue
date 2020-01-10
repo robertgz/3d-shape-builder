@@ -7,7 +7,6 @@ import Stats from 'three/examples/jsm/libs/stats.module';
 
 export default {
   props: { 
-    parentNodeSelector: String,
     panel: {
       type: Number,
       default: 0
@@ -20,6 +19,8 @@ export default {
       sceneRootNode: null,
     }
   },
+
+  inject: { threeElement: 'threeElement' },
   
   mounted: function () {
     this.init();
@@ -31,8 +32,7 @@ export default {
       this.stats = new Stats();
       this.stats.showPanel(this.panel);
 
-      this.sceneRootNode = document.querySelector(this.parentNodeSelector)
-      this.sceneRootNode.appendChild( this.stats.dom );
+      this.threeElement().appendChild( this.stats.dom );
     },
     animate: function () {
       this.stats.update();
