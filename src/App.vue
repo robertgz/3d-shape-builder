@@ -19,3 +19,9 @@ export default {
   }),
 };
 </script>
+
+<style>
+  html {
+    overflow-y: auto !important;
+  }
+</style>
