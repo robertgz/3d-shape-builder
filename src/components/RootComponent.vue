@@ -26,7 +26,9 @@ export default {
 
   computed: {  },
 
-  created: function() {  },
+  created: function() { 
+    this.setHtmlFullPage();
+   },
 
   mounted: function () {  },
 
@@ -34,6 +36,10 @@ export default {
 
     deletePressed: function(event) {
       this.$store.dispatch('objects/deleteSelected');
+    },
+
+    setHtmlFullPage() {
+      document.querySelector('html').style.overflowY = "auto";
     },
 
   }
