@@ -1,9 +1,9 @@
 <template>
   <div ref="threeElement" id="threeElementID" >
 
-    <StatsComponent       
+    <!-- <StatsComponent       
       v-bind:panel="0"
-    ></StatsComponent>
+    ></StatsComponent> -->
 
     <SceneComponent />
     <MouseClickComponent />
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import * as THREE from 'three';
 import { mapGetters, mapMutations, mapActions } from 'vuex';
 
 import StatsComponent from './StatsComponent.vue';

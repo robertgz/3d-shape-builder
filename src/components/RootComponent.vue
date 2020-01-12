@@ -1,19 +1,24 @@
 <template>
   <div v-on:keyup.delete="deletePressed">  
     <ThreeComponent />
-    <UIComponent/>
+    <!-- <UIComponent/> -->
+    <ToolsUI/>
+    <PropertiesUI/>
   </div>
 </template>
 
 <script>
-import * as THREE from 'three';
 import ThreeComponent from './ThreeComponent.vue';
 import UIComponent from './UIComponent.vue';
+import ToolsUI from './ToolsUI.vue';
+import PropertiesUI from './PropertiesUI.vue';
 
 export default {
   components: {
     ThreeComponent,
     UIComponent,
+    ToolsUI,
+    PropertiesUI,
   },
 
   provide: function() {
@@ -41,5 +46,4 @@ export default {
 </script>
 
 <style scoped>
-  canvas { width: 100%; height: 100% }
 </style>
