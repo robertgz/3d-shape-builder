@@ -7,7 +7,8 @@
       permanent
       width="auto"
       height="auto"
-      class="blue lighten-2 ml-2 mt-2"
+      class="blue-grey lighten-2 ml-2 mt-2"
+      style="border-radius: 10px;"
     >
     <v-container>
       <v-row >
@@ -23,7 +24,7 @@
 
       <v-row >
         <v-col>
-          <v-btn v-on:click="toggleSelect" 
+          <v-btn v-on:click="activateSelect" 
             class="mx-2" 
             fab dark  
             color="blue">
@@ -34,7 +35,7 @@
 
       <v-row >
         <v-col>
-          <v-btn v-on:click="toggleMove" 
+          <v-btn v-on:click="activateMove" 
             class="mx-2" 
             fab dark 
             color="blue">
@@ -45,7 +46,7 @@
 
       <v-row >
         <v-col>
-          <v-btn disabled
+          <v-btn  v-on:click="activateRotate"
             class="mx-2" 
             fab dark 
             color="blue">
@@ -56,7 +57,7 @@
 
       <v-row >
         <v-col>
-          <v-btn disabled
+          <v-btn v-on:click="activateScale"
             class="mx-2" 
             fab dark 
             color="blue">
@@ -113,32 +114,60 @@ export default {
     }),
     ...mapMutations('controls', {
       setTransformControlStatus: 'setTransformControlActiveStatus',
+      setTransformStatus: 'setTransformControlActiveStatus',
+      setTransformControlMode: 'setTransformControlMode',
     }),
 
     // addBox: function (event) {
     //   // this.$store.dispatch('objects/addBox');
     // },
 
-    
-    toggleSelect: function (event) {
-
-      this.selectEnabled = !this.selectEnabled;
-
-      if (this.selectEnabled) {
-        this.enableSelect();
-      } else {
-        this.disableSelect();
-      }
-
+    activateSelect() {
+      this.selectEnabled = true;
+      this.enableSelect();
+      this.setTransformStatus({ status: false });
     },
 
-    toggleMove (event) {
+    activateMove() {
+      this.selectEnabled = true;
+      this.enableSelect();
+      this.setTransformStatus({ status: true });
+      this.setTransformControlMode( { mode: "translate" });
+    },
+
+    activateRotate() {
+      this.selectEnabled = true;
+      this.enableSelect();
+      this.setTransformStatus({ status: true });
+      this.setTransformControlMode( { mode: "rotate" });
+    },
+
+    activateScale() {
+      this.selectEnabled = true;
+      this.enableSelect();
+      this.setTransformStatus({ status: true });
+      this.setTransformControlMode( { mode: "scale" });
+    },
+
+    // toggleSelect: function (event) {
+
+    //   this.selectEnabled = !this.selectEnabled;
+
+    //   if (this.selectEnabled) {
+    //     this.enableSelect();
+    //   } else {
+    //     this.disableSelect();
+    //   }
+
+    // },
+
+    // toggleMove (event) {
      
-      this.setTransformControlStatus({ 
-        status: !this.isTransformControlActive
-      });
+    //   this.setTransformControlStatus({ 
+    //     status: !this.isTransformControlActive
+    //   });
 
-    },
+    // },
 
     // deleteSelected: function (event) {
     //   this.$store.dispatch('objects/deleteSelected');

@@ -9,6 +9,7 @@ const controls = {
     transformControlActive: false,
     transformDragging: false,
     // dragControlActive: false,
+    transformControlMode: '',
   },
 
   getters: {
@@ -25,6 +26,10 @@ const controls = {
       return state.orbitControlActive;
     },
 
+    getTransformControlMode(state) {
+      return state.transformControlMode;
+    }
+
   },
 
   actions: {  },
@@ -33,6 +38,10 @@ const controls = {
 
     setTransformControlActiveStatus(state, { status }) {
       state.transformControlActive = status;
+    },
+
+    setTransformControlMode(state, { mode }) {
+      state.transformControlMode = mode;
     },
 
     setTransformDraggingStatus(state, { status }) {

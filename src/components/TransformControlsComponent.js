@@ -31,6 +31,7 @@ export default {
     ...mapGetters('controls', {
       isTransformControlActive: 'isTransformControlActive',
       isOrbitControlActive: 'isOrbitControlActive',
+      transformControlMode: 'getTransformControlMode',
     }),
 
     ...mapGetters('select', {
@@ -71,6 +72,10 @@ export default {
 
     'centroid': function (newCentroid, oldCentroid) {
       this.setTransformPosition(this.centroid);
+    },
+
+    'transformControlMode': function(newMode, oldMode) {
+      this.$options.transformControl.setMode(newMode);
     },
 
   },
