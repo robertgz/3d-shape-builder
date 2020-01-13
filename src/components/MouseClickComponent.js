@@ -27,8 +27,11 @@ export default {
   },
 
   beforeDestroy: function() {
-    this.threeElement().removeEventListener('click', this.clickEvent, false);
-    this.threeElement().removeEventListener('mousedown', this.mouseDown, false);
+    if (this.threeElement()) {
+      this.threeElement().removeEventListener('click', this.clickEvent, false);
+      this.threeElement().removeEventListener('mousedown', this.mouseDown, false);
+    }
+
    },
 
   methods: {
