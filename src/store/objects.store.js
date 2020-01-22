@@ -6,6 +6,8 @@ const materials = {
   default: null,
   selected: null,
 };
+const transformTypes = ['position', 'rotation', 'scale'];
+const axisTypes = ['x', 'y', 'z'];
 
 const objects = {
   namespaced: true,
@@ -30,6 +32,14 @@ const objects = {
 
     getObjectPositionByID: (state) => (id) => {
       return { ...state.meshObjs[id].position };
+    },
+
+    getObjectPropertyByID: (state) => (id, transform) => {
+      
+      if ( transformTypes.includes(transform) ) {
+        return { ...state.meshObjs[id][transform] };
+      }
+
     },
 
   },
@@ -151,6 +161,37 @@ const objects = {
       );
 
     },
+
+    setObjectProperty( context, { id, axis, amount, transform } ) {
+      const scene = context.rootGetters['scene/getScene'];
+      const meshObject3D = scene.getObjectById( parseInt( id, 10 ) );  // Object3D
+      const axisProperty = parseFloat(amount);
+
+      if ( transformTypes.includes(transform) && axisTypes.includes(axis) ) {
+
+        const {x, y, z} = meshObject3D[transform];
+        let xyz = {x, y, z};
+        xyz[axis] = axisProperty;
+        meshObject3D[transform].fromArray( Object.values(xyz) );
+        meshObject3D.updateMatrix();
+
+      }
+
+      context.commit('setMeshObjProperty', {
+        id: id,
+        axis: axis,
+        property: transform,
+        amount: axisProperty,
+      });
+
+      context.dispatch(
+        'select/updateSelectedCentroid', 
+        null,
+        { root: true }
+      );
+
+    },
+
   },
 
   mutations: {
@@ -162,12 +203,23 @@ const objects = {
 
     },
 
+    updateObjectPropertyFromGraph(state, { object } ){
+
+      Vue.set(state.meshObjs, object.id, {
+        scale: {...object.scale},
+        rotation: {...object.rotation.toVector3()}, // in radians, convert to degrees
+        position: {...object.position},
+      });
+
+    },
+
     addMeshObj(state, { id, object, type }) {
 
       Vue.set(state.meshObjs, id, { // object.id does not work, not sure why?
         type: type,
-        position: {...object.position},
         scale: {...object.scale},
+        rotation: {...object.rotation.toVector3()}, // in radians, convert to degrees
+        position: {...object.position},
         // color: object.material.color.getHexString(),
       });
 
@@ -175,8 +227,10 @@ const objects = {
 
     setMeshObjPosition(state, { id, axis, amount }) {
       state.meshObjs[id].position[axis] = parseFloat(amount);
+    },
 
-      // state.meshObjs[id].scale[axis] = parseFloat(amount);
+    setMeshObjProperty(state, { id, axis, amount, property }) {
+      state.meshObjs[id][property][axis] = parseFloat(amount);
     },
 
     deleteMeshObj(state, { id }) {

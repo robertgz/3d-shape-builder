@@ -71,10 +71,11 @@ export default {
     },
 
     'centroid': function (newCentroid, oldCentroid) {
-      this.setTransformPosition(this.centroid);
+      this.setTransformPosition(newCentroid);
     },
 
     'transformControlMode': function(newMode, oldMode) {
+      this.resetTransformGroup();
       this.$options.transformControl.setMode(newMode);
     },
 
@@ -108,6 +109,12 @@ export default {
         centroid.y, 
         centroid.z
       );
+    },
+
+    resetTransformGroup() {
+
+      this.$options.transformGroup.scale.set( 1, 1, 1 );
+      this.$options.transformGroup.rotation.set( 0, 0, 0 );
 
     },
 
@@ -127,9 +134,32 @@ export default {
       } else {
 
         objectList.forEach( oneObject => {
-          this.scene.attach(oneObject); // change to previous parent
-          this.updateObjectPosition({ object: oneObject });
+          // this.scene.attach(oneObject); // change to previous parent
+          // this.updateObjectProperty({ object: oneObject });
+          // return;
+         
+          // alternate process
+          let scl = new THREE.Vector3( );
+          let rot = new THREE.Quaternion( );
+          let rotEuler = new THREE.Euler( );
+          let pos = new THREE.Vector3( );
+
+          scl = oneObject.getWorldScale( scl );
+          rot = oneObject.getWorldQuaternion( rot );
+          pos = oneObject.getWorldPosition( pos );
+
+          this.$options.transformGroup.remove( oneObject );
+          this.scene.add(oneObject);
+
+          oneObject.scale.copy( scl );
+          oneObject.quaternion.copy( rot );
+          oneObject.position.copy( pos );
+          oneObject.updateMatrix();
+
+          this.updateObjectProperty({ object: oneObject });
         });
+
+        this.resetTransformGroup();
 
       }
 
@@ -172,6 +202,7 @@ export default {
     
     ...mapMutations('objects', {
       updateObjectPosition: 'updateObjectPositionFromGraph',
+      updateObjectProperty: 'updateObjectPropertyFromGraph',
     }),
     
     ...mapActions('select', {
