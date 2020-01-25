@@ -6,6 +6,7 @@
     ></StatsComponent> -->
 
     <SceneComponent />
+    <HelpersComponent />
     <MouseClickComponent />
     <OrbitControlsComponent/>
     <TransformControlsComponent/>
@@ -19,6 +20,7 @@ import { mapGetters, mapMutations, mapActions } from 'vuex';
 import StatsComponent from './StatsComponent.vue';
 
 import SceneComponent from './SceneComponent.vue';
+import HelpersComponent from './HelpersComponent.js';
 import MouseClickComponent from './MouseClickComponent.js';
 import OrbitControlsComponent from './OrbitControlsComponent.js';
 import TransformControlsComponent from './TransformControlsComponent.js';
@@ -29,6 +31,7 @@ export default {
   components: {
     StatsComponent,
     SceneComponent,
+    HelpersComponent,
     MouseClickComponent,
     OrbitControlsComponent,
     TransformControlsComponent,
