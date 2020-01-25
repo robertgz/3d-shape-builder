@@ -16,6 +16,11 @@ export default {
       renderer: null,
       size: {width: 0, height: 0 },
       camera: null,
+      cameraPosition: {
+        x: 6,
+        y: 3,
+        z: 1,
+      },
     }
   },
 
@@ -59,7 +64,9 @@ export default {
     
     setupCamera() {
       this.camera = new THREE.PerspectiveCamera( 75, this.size.width / this.size.height, 0.1, 1000 );
-      this.camera.position.z = 5;
+      this.camera.position.x = this.cameraPosition.x;
+      this.camera.position.y = this.cameraPosition.y;
+      this.camera.position.z = this.cameraPosition.z;
     },
 
     startRendering() {
