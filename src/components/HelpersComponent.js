@@ -15,6 +15,7 @@ export default {
   computed: {
     ...mapGetters('scene', {
       scene: 'getScene',
+      helpersNode: 'getHelpersNode',
     }),
   },
 
@@ -25,7 +26,8 @@ export default {
   methods: {
     createGrid() {
       this.gridHelper = new THREE.GridHelper( this.size, this.divisions );
-      this.scene.add( this.gridHelper );
+      this.gridHelper.rotateX(Math.PI / 2.0);
+      this.helpersNode.add( this.gridHelper );
     },
 
   },
