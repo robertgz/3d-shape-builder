@@ -99,6 +99,18 @@ const objects = {
         type: type,
       });
 
+      context.commit(
+        'select/clearSelection', 
+        null,
+        { root: true }
+      );
+
+      context.commit(
+        'select/addToSelection',
+        { object: group, },
+        { root: true }
+      );
+
     },
 
     deleteObjectsByIds( context, { ids } ) {
