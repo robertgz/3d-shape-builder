@@ -27,6 +27,7 @@ export default {
   mounted: function () {
 
     this.scene = new THREE.Scene();
+    THREE.Object3D.DefaultUp = new THREE.Vector3(0,0,1); // set the coordinate system to be Z-up
 
     this.setSize();
     this.setupRenderer();
