@@ -1,9 +1,15 @@
 <template>
-  <div v-on:keyup.delete="deletePressed">  
+  <div 
+    v-on:keyup.delete="deletePressed" 
+    ref="rootElement"
+  >  
+
     <ThreeComponent />
     <!-- <UIComponent/> -->
     <ToolsUI/>
     <PropertiesUI/>
+    <AddObjectsToolbar/>
+
   </div>
 </template>
 
@@ -12,6 +18,7 @@ import ThreeComponent from './ThreeComponent.vue';
 import UIComponent from './UIComponent.vue';
 import ToolsUI from './ToolsUI.vue';
 import PropertiesUI from './PropertiesUI.vue';
+import AddObjectsToolbar from './AddObjectsToolbar.vue';
 
 export default {
   components: {
@@ -19,10 +26,13 @@ export default {
     UIComponent,
     ToolsUI,
     PropertiesUI,
+    AddObjectsToolbar,
   },
 
-  provide: function() {
-    return {  }
+  provide: function() {  
+    return {
+      rootElement: this.getRootElement,
+    }
   },
 
   data () {
@@ -39,6 +49,12 @@ export default {
 
     deletePressed: function(event) {
       this.$store.dispatch('objects/deleteSelected');
+    },
+
+    getRootElement () {
+
+      return this.$refs.rootElement;
+
     },
 
   }

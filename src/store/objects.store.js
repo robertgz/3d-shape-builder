@@ -61,6 +61,31 @@ const objects = {
 
     },
 
+    add3DSolid( context, { type } ) {
+      let geometry = null;
+
+      switch (type) {
+        case "box":
+          geometry = new THREE.BoxGeometry( 1, 1, 1 );
+          break;
+        case "cylinder":
+          geometry = new THREE.CylinderGeometry( .5, .5, 1, 32 );
+          break;
+        case "cone":
+          geometry = new THREE.ConeGeometry( .5, 1, 32 );
+          break;
+        case "sphere":
+          geometry = new THREE.SphereGeometry( .5, 32, 32 );
+          break;
+        default:
+          console.log("Shape type not supported.");
+      }
+
+      if (geometry) {
+        context.dispatch('addMesh', { geometry: geometry, type: type });
+      }
+    },
+
     addBox(context, payload) {
       let geometry = new THREE.BoxGeometry( 1, 1, 1 );
 
