@@ -11,6 +11,9 @@ export default {
   },
 
   methods: {
+    ...mapMutations('objects', {
+      updateObjectPropertyFromGraph: 'updateObjectPropertyFromGraph',
+    }), 
     
     getObjectID (object) {
       return object.object.parent.id;
@@ -22,10 +25,24 @@ export default {
 
     attachObjectsToParent(objectIDList, newParent) {
 
-      let list = this.findObjectsFromRootByIDs(objectIDList)
+      let list = this.findObjectsFromRootByIDs(objectIDList);
 
       list.forEach( oneObject => {
         newParent.attach(oneObject);
+      });
+
+    },
+
+    updateObjects( objectIDList ) {
+
+      let list = this.findObjectsFromRootByIDs(objectIDList);
+
+      list.forEach( oneObject => {
+
+        this.updateObjectPropertyFromGraph({          
+          object: oneObject
+        });
+
       });
 
     },

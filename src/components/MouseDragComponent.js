@@ -13,6 +13,8 @@ export default {
       isMouseDown: false,
       isMouseOverObject: false,
       isDragging: false,
+      orbitControlStatus: false,
+      transformControlStatus: false,
       objectID: '',
     }
   },
@@ -23,6 +25,10 @@ export default {
   computed: {
     ...mapGetters('select', {
       getSelected: 'getSelected',
+    }),
+    ...mapGetters('controls', {
+      isOrbitControlActive: 'isOrbitControlActive',
+      isTransformControlActive: 'isTransformControlActive',
     }),
     ...mapGetters('scene', {
       scene: 'getScene',
@@ -93,7 +99,12 @@ export default {
 
         this.attachObjectsToParent( this.getSelected, this.$options.dragGroup );
 
+        this.orbitControlStatus = this.isOrbitControlActive;
         this.setOrbitControlActiveStatus({ status: false });
+
+        this.transformControlStatus = this.isTransformControlActive;
+        this.setTransformControlActiveStatus({ status: false });
+
         this.isDragging = true;
       }
 
@@ -106,11 +117,12 @@ export default {
       this.isMouseDown = false;
       this.isDragging = false;
       this.$options.clickedObject = null;
-      this.attachObjectsToParent( this.getSelected, this.scene );
-      // update store data for dragged objects
-      // this.updateObjectPropertyFromGraph( { object: newObject } );      
 
-      this.setOrbitControlActiveStatus({ status: true });
+      this.attachObjectsToParent( this.getSelected, this.scene );
+      this.updateObjects( this.getSelected );
+
+      this.setOrbitControlActiveStatus({ status: this.orbitControlStatus });
+      this.setTransformControlActiveStatus({ status: this.transformControlStatus });
     },
 
     ...mapMutations('select', {
@@ -120,6 +132,7 @@ export default {
 
     ...mapMutations('controls', {
       setOrbitControlActiveStatus: 'setOrbitControlActiveStatus',
+      setTransformControlActiveStatus: 'setTransformControlActiveStatus',
     }),
   },
 
