@@ -114,15 +114,18 @@ export default {
 
     },
     mouseUp(event) {
+      if ( this.isDragging ) {
+        this.attachObjectsToParent( this.getSelected, this.scene );
+        this.updateObjects( this.getSelected );
+
+        this.setOrbitControlActiveStatus({ status: this.orbitControlStatus });
+        this.setTransformControlActiveStatus({ status: this.transformControlStatus });
+
+        this.isDragging = false;
+      }
+
       this.isMouseDown = false;
-      this.isDragging = false;
       this.$options.clickedObject = null;
-
-      this.attachObjectsToParent( this.getSelected, this.scene );
-      this.updateObjects( this.getSelected );
-
-      this.setOrbitControlActiveStatus({ status: this.orbitControlStatus });
-      this.setTransformControlActiveStatus({ status: this.transformControlStatus });
     },
 
     ...mapMutations('select', {
