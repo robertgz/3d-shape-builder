@@ -21,17 +21,24 @@ export default {
         y: 3,
         z: 1,
       },
+      lighting: {
+        color: 0xFFFFFF,
+        intensity: 1.0,
+        light: null,
+      },
     }
   },
 
   mounted: function () {
 
     this.scene = new THREE.Scene();
+    this.scene.background = new THREE.Color( 0x202020 );;
     THREE.Object3D.DefaultUp = new THREE.Vector3(0,0,1); // set the coordinate system to be Z-up
 
     this.setSize();
     this.setupRenderer();
     this.setupCamera();
+    this.setupLighting();
 
     this.addSceneData({
       scene: this.scene,
@@ -80,6 +87,15 @@ export default {
       this.camera.position.x = this.cameraPosition.x;
       this.camera.position.y = this.cameraPosition.y;
       this.camera.position.z = this.cameraPosition.z;
+    },
+
+    setupLighting() {
+      this.lighting.light = new THREE.DirectionalLight(
+        this.lighting.color,
+        this.lighting.intensity
+      );
+      this.lighting.light.position.set(-1, 2, 4);
+      this.scene.add( this.lighting.light );
     },
 
     startRendering() {
