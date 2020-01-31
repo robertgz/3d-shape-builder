@@ -72,16 +72,6 @@ export default {
       window.addEventListener( 'resize', this.onElementResize, false );
     },
 
-    onElementResize(event) {
-      let width  = window.innerWidth;
-      let height = window.innerHeight;
-
-      this.camera.aspect = width / height;
-      this.camera.updateProjectionMatrix();
-    
-      this.renderer.setSize(width, height);
-    },
-
     setupCamera() {
       this.camera = new THREE.PerspectiveCamera( 75, this.size.width / this.size.height, 0.1, 1000 );
       this.camera.position.x = this.cameraPosition.x;
@@ -109,6 +99,16 @@ export default {
 
       animate();
 
+    },
+
+    onElementResize(event) {
+      let width  = window.innerWidth;
+      let height = window.innerHeight;
+
+      this.camera.aspect = width / height;
+      this.camera.updateProjectionMatrix();
+    
+      this.renderer.setSize(width, height);
     },
 
     ...mapActions('scene', {
