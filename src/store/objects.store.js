@@ -13,7 +13,7 @@ const objects = {
   namespaced: true,
   state: {
     meshObjs: {},
-    defaultColor: 0x808080,
+    defaultColor: 0x44aa88,
   },
 
   getters: {
@@ -47,7 +47,7 @@ const objects = {
   actions: {
     setup(context, payload) {
 
-      materials.default = new THREE.MeshBasicMaterial({
+      materials.default = new THREE.MeshPhongMaterial({
         color: context.state.defaultColor,
         polygonOffset: true,
         polygonOffsetFactor: 1, // positive value pushes polygon further away
