@@ -14,56 +14,86 @@
 
       <v-row >
         <v-col>
-          <v-btn v-on:click="activateSelect" 
-            class="mx-2" 
-            fab dark  
-            color="blue">
-            <v-icon large>mdi-arrow-top-left-thick</v-icon>
-          </v-btn>
+          <v-tooltip right>
+            <template v-slot:activator="{ on }">  
+              <v-btn v-on:click="activateSelect" 
+                class="mx-2" 
+                fab dark  
+                color="blue"
+                v-on="on">
+                <v-icon large>mdi-arrow-top-left-thick</v-icon>
+              </v-btn>
+            </template>
+            <span>Select</span>
+          </v-tooltip>
         </v-col>
       </v-row>
 
       <v-row >
         <v-col>
-          <v-btn v-on:click="activateMove" 
-            class="mx-2" 
-            fab dark 
-            color="blue">
-            <v-icon large>mdi-cursor-move</v-icon>
-          </v-btn>
+          <v-tooltip right>
+            <template v-slot:activator="{ on }">  
+              <v-btn v-on:click="activateMove" 
+                class="mx-2" 
+                fab dark 
+                color="blue"
+                v-on="on">
+                <v-icon large>mdi-cursor-move</v-icon>
+              </v-btn>
+            </template>
+            <span>Move</span>
+          </v-tooltip>
         </v-col>
       </v-row>
 
       <v-row >
         <v-col>
-          <v-btn  v-on:click="activateRotate"
-            class="mx-2" 
-            fab dark 
-            color="blue">
-            <v-icon large>mdi-rotate-3d-variant</v-icon>
-          </v-btn>
+          <v-tooltip right>
+            <template v-slot:activator="{ on }">  
+              <v-btn  v-on:click="activateRotate"
+                class="mx-2" 
+                fab dark 
+                color="blue"
+                v-on="on">
+                <v-icon large>mdi-rotate-3d-variant</v-icon>
+              </v-btn>
+            </template>
+            <span>Rotate</span>
+          </v-tooltip>
         </v-col>
       </v-row>
 
       <v-row >
         <v-col>
-          <v-btn v-on:click="activateScale"
-            class="mx-2" 
-            fab dark 
-            color="blue">
-            <v-icon large>mdi-resize</v-icon>
-          </v-btn>
+          <v-tooltip right>
+            <template v-slot:activator="{ on }">  
+              <v-btn v-on:click="activateScale"
+                class="mx-2" 
+                fab dark 
+                color="blue"
+                v-on="on">
+                <v-icon large>mdi-resize</v-icon>
+              </v-btn>
+            </template>
+            <span>Scale</span>
+          </v-tooltip>
         </v-col>
       </v-row>
 
       <v-row >
         <v-col>
-          <v-btn v-on:click="deleteSelected" 
-            class="mx-2" 
-            fab dark 
-            color="red">
-            <v-icon large>mdi-delete</v-icon>
-          </v-btn>
+          <v-tooltip right>
+            <template v-slot:activator="{ on }">  
+              <v-btn v-on:click="deleteSelected" 
+                class="mx-2" 
+                fab dark 
+                color="red"
+                v-on="on">
+                <v-icon large>mdi-delete</v-icon>
+              </v-btn>
+            </template>
+            <span>Delete</span>
+          </v-tooltip>
         </v-col>
       </v-row>
 
@@ -82,6 +112,9 @@ export default {
     return {
       drawer: true,
       selectEnabled: false,
+      tools: [
+        {},
+      ],
     }
   },
 
