@@ -11,16 +11,6 @@
       style="border-radius: 10px;"
     >
     <v-container>
-      <v-row >
-        <v-col>
-          <v-btn v-on:click="addBox"
-            class="mx-2" 
-            fab dark 
-            color="green">
-            <v-icon large >mdi-plus-thick</v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
 
       <v-row >
         <v-col>
@@ -105,7 +95,7 @@ export default {
 
   methods: {
     ...mapActions('objects', {
-      addBox: 'addBox',
+      // addBox: 'addBox',
       deleteSelected: 'deleteSelected',
     }),
     ...mapActions('select', {
@@ -117,10 +107,6 @@ export default {
       setTransformStatus: 'setTransformControlActiveStatus',
       setTransformControlMode: 'setTransformControlMode',
     }),
-
-    // addBox: function (event) {
-    //   // this.$store.dispatch('objects/addBox');
-    // },
 
     activateSelect() {
       this.selectEnabled = true;
