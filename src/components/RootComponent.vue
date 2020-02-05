@@ -5,7 +5,6 @@
   >  
 
     <ThreeComponent />
-    <!-- <UIComponent/> -->
     <ToolsUI/>
     <PropertiesUI/>
     <AddObjectsToolbar/>
@@ -15,7 +14,6 @@
 
 <script>
 import ThreeComponent from './ThreeComponent.vue';
-import UIComponent from './UIComponent.vue';
 import ToolsUI from './ToolsUI.vue';
 import PropertiesUI from './PropertiesUI.vue';
 import AddObjectsToolbar from './AddObjectsToolbar.vue';
@@ -23,7 +21,6 @@ import AddObjectsToolbar from './AddObjectsToolbar.vue';
 export default {
   components: {
     ThreeComponent,
-    UIComponent,
     ToolsUI,
     PropertiesUI,
     AddObjectsToolbar,
