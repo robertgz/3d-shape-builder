@@ -7,7 +7,7 @@
     >
 
         <v-row class="" justify="space-between">
-          <v-col v-for="shape of shapes" key="shape.key" cols="auto">
+          <v-col v-for="shape of shapes" :key="shape.itemNum" cols="auto">
             <v-card 
               outlined
               class="text-center pa-1 toolBtn"
@@ -40,22 +40,22 @@ export default {
       { 
         type: "box",
         image: require('../assets/box.png'),
-        key: 1,
+        itemNum: 1,
       },
       { 
         type: "cylinder",
         image: require('../assets/cylinder.png'),
-        key: 2,
+        itemNum: 2,
       },
       { 
         type: "cone",
         image: require('../assets/cone.png'),
-        key: 3,
+        itemNum: 3,
       },
       { 
         type: "sphere",
         image: require('../assets/sphere.png'),
-        key: 4,
+        itemNum: 4,
       },
     ],
     dragGroup: null,
