@@ -7,7 +7,7 @@
     >
 
         <v-row class="" justify="space-between">
-          <v-col v-for="shape of shapes" cols="auto">
+          <v-col v-for="shape of shapes" key="shape.key" cols="auto">
             <v-card 
               outlined
               class="text-center pa-1 toolBtn"
@@ -20,7 +20,7 @@
 
               <div class="subtitle-2 text-capitalize">{{shape.type}}</div>
               
-              <v-img src="http://via.placeholder.com/50x50"></v-img>
+              <v-img :src="shape.image"></v-img>
             </v-card>
           </v-col>
         </v-row>
@@ -39,15 +39,23 @@ export default {
     shapes: [ // get these from store
       { 
         type: "box",
+        image: require('../assets/box.png'),
+        key: 1,
       },
       { 
         type: "cylinder",
+        image: require('../assets/cylinder.png'),
+        key: 2,
       },
       { 
         type: "cone",
+        image: require('../assets/cone.png'),
+        key: 3,
       },
       { 
         type: "sphere",
+        image: require('../assets/sphere.png'),
+        key: 4,
       },
     ],
     dragGroup: null,
