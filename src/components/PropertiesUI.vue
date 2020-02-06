@@ -15,21 +15,22 @@
       <v-expansion-panel 
         :disabled="isTransformDisabled"
         v-for="transform of transforms"
+        :key="transform.id"
       >
         <v-expansion-panel-header class="capitalize">
-          {{transform}}
+          {{transform.property}}
         </v-expansion-panel-header>
         <v-expansion-panel-content>
 
-          <v-row v-for="axis in axes">
+          <v-row v-for="axis in axes" :key="axis.id">
             <v-col class=" py-0">
               <CoordinateInputComponent
-                v-bind:transform="transform"
-                v-bind:axis="axis"
+                v-bind:transform="transform.property"
+                v-bind:axis="axis.direction"
                 v-bind:stepAmount="stepAmount"
                 v-bind:blurPrecision="2"
                 v-bind:focusPrecision="8"
-                v-bind:elementID="transform + '-' + axis"
+                v-bind:elementID="transform.property + '-' + axis.direction"
                 v-bind:isDisabled="isTransformDisabled"
               ></CoordinateInputComponent>
             </v-col>
@@ -61,8 +62,34 @@ export default {
       drawer: true,
       stepAmount: 0.25,
       decimalPlaces: 3,
-      transforms: [ 'position', 'rotation', 'scale' ],
-      axes: ['x', 'y', 'z'],
+      transforms: [
+        {
+          id: 1,
+          property: 'position',
+        },
+        {
+          id: 2,
+          property: 'rotation',
+        },
+        {
+          id: 3,
+          property: 'scale',
+        },
+      ],
+      axes: [
+        {
+          id: 1,
+          direction: 'x',
+        },
+        {
+          id: 2,
+          direction: 'y',
+        },
+        {
+          id: 3,
+          direction: 'z',
+        },
+      ],
     }
   },
 
