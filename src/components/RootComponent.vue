@@ -1,15 +1,15 @@
 <template>
-  <div 
+  <v-content  
     v-on:keyup.delete="deletePressed" 
     ref="rootElement"
-  >  
+  >
 
     <ThreeComponent />
     <ToolsUI/>
     <PropertiesUI/>
     <AddObjectsToolbar/>
 
-  </div>
+  </v-content>
 </template>
 
 <script>
