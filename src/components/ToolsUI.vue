@@ -1,19 +1,16 @@
 <template>
-
-  <v-content>
-    <v-navigation-drawer app 
-      v-model="drawer"
-      floating
-      permanent
-      width="auto"
-      height="auto"
-      class="blue-grey lighten-2 ml-2 mt-2"
-      style="border-radius: 10px;"
+  <v-container
+    fluid
+    fill-height
+    id="tools-container"
+  >
+    <v-row
+      class="blue-grey ma-2"
+      id="tools"      
     >
-    <v-container>
+      <v-col>
 
-      <v-row >
-        <v-col>
+        <v-row class="my-2">
           <v-tooltip right>
             <template v-slot:activator="{ on }">  
               <v-btn v-on:click="activateSelect" 
@@ -26,11 +23,9 @@
             </template>
             <span>Select</span>
           </v-tooltip>
-        </v-col>
-      </v-row>
+        </v-row>
 
-      <v-row >
-        <v-col>
+        <v-row class="my-2">
           <v-tooltip right>
             <template v-slot:activator="{ on }">  
               <v-btn v-on:click="activateMove" 
@@ -43,11 +38,9 @@
             </template>
             <span>Move</span>
           </v-tooltip>
-        </v-col>
-      </v-row>
+        </v-row>
 
-      <v-row >
-        <v-col>
+        <v-row  class="my-2">
           <v-tooltip right>
             <template v-slot:activator="{ on }">  
               <v-btn  v-on:click="activateRotate"
@@ -60,11 +53,9 @@
             </template>
             <span>Rotate</span>
           </v-tooltip>
-        </v-col>
-      </v-row>
-
-      <v-row >
-        <v-col>
+        </v-row>
+ 
+        <v-row class="my-2">
           <v-tooltip right>
             <template v-slot:activator="{ on }">  
               <v-btn v-on:click="activateScale"
@@ -77,11 +68,9 @@
             </template>
             <span>Scale</span>
           </v-tooltip>
-        </v-col>
-      </v-row>
+        </v-row>
 
-      <v-row >
-        <v-col>
+        <v-row class="my-2">
           <v-tooltip right>
             <template v-slot:activator="{ on }">  
               <v-btn v-on:click="deleteSelected" 
@@ -94,14 +83,11 @@
             </template>
             <span>Delete</span>
           </v-tooltip>
-        </v-col>
-      </v-row>
+        </v-row>
 
-    </v-container>
-
-    </v-navigation-drawer>
-  </v-content>
-
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -198,4 +184,9 @@ export default {
 </script>
 
 <style scoped>
+#tools {
+  border-radius: 10px;
+  z-index: 5;
+  position: fixed;
+}
 </style>
