@@ -1,7 +1,8 @@
 <template>
   <v-content  
-    v-on:keyup.delete="deletePressed" 
+    v-on:keyup.native.delete="deletePressed" 
     ref="rootElement"
+    id="rootComponent"
   >
 
     <ThreeComponent />
@@ -28,7 +29,7 @@ export default {
 
   provide: function() {  
     return {
-      rootElement: this.getRootElement,
+      // rootElement: this.getRootElement,
     }
   },
 
@@ -48,11 +49,9 @@ export default {
       this.$store.dispatch('objects/deleteSelected');
     },
 
-    getRootElement () {
-
-      return this.$refs.rootElement;
-
-    },
+    // getRootElement () {
+    //   return this.$refs.rootElement;
+    // },
 
   }
 }
