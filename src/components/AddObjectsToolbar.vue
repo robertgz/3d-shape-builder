@@ -60,9 +60,8 @@ export default {
     ],
     dragGroup: null,
     transformControlStatus: false,
+    objectDropped: false,
   }),
-
-  inject: { rootElement: 'rootElement' },
 
   computed: {
     ...mapGetters('scene', {
@@ -80,7 +79,7 @@ export default {
 
   mounted: function () { 
     this.getRendererElement.addEventListener('dragover', this.dragOver, false);
-    this.rootElement().addEventListener('keydown', this.key, false);
+    this.getRendererElement.addEventListener('drop', this.drop, false);
 
   },
 
@@ -103,11 +102,13 @@ export default {
 
       this.transformControlStatus = this.isTransformControlActive;
       this.setTransformControlActiveStatus( { status: false } );
+      this.objectDropped = false;
 
     },
 
     dragOver(event){
       event.preventDefault(); // Do NOT remove!
+      event.dataTransfer.dropEffect = "copy";
 
       if ( this.dragGroup && !this.dragGroup.visible ) {
         this.dragGroup.visible = true;
@@ -118,15 +119,24 @@ export default {
 
     },
 
-    endDrag(event){
-      console.log("event.dataTransfer.dropEffect", event.dataTransfer.dropEffect);
+    drop(event) {
+      event.preventDefault(); // Do NOT remove!
       
       let newObject = this.dragGroup.children[0];
 
-      if (event.dataTransfer.dropEffect === "copy") {   
+      if (newObject) {
         this.scene.attach(newObject);
-        this.updateObjectPropertyFromGraph( { object: newObject } );      
-      } else if (event.dataTransfer.dropEffect === "none") {
+        this.updateObjectPropertyFromGraph( { object: newObject } );   
+        this.objectDropped = true;
+      }
+    },
+
+    endDrag(event){
+      event.preventDefault();
+
+      let newObject = this.dragGroup.children[0];
+
+      if (!this.objectDropped) {
         this.dragGroup.remove(newObject);
         this.clearSelection();
       }
