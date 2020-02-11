@@ -1,19 +1,9 @@
-# project
+# 3D Shape Viewer
 
-## Project setup
-```
-npm install
-```
+Browser based editor for creating basic 3D solids. 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Drag and drop 3D shapes onto the modeling plane.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Works with recent desktop versions of Chrome and Firefox
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Built using three.js, Vue, Vuex, and Vuetify.
