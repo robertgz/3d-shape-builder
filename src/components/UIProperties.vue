@@ -24,7 +24,7 @@
 
           <v-row v-for="axis in axes" :key="axis.id">
             <v-col class=" py-0">
-              <CoordinateInputComponent
+              <UIPropertiesCoordinateInput
                 v-bind:transform="transform.property"
                 v-bind:axis="axis.direction"
                 v-bind:stepAmount="stepAmount"
@@ -32,7 +32,7 @@
                 v-bind:focusPrecision="8"
                 v-bind:elementID="transform.property + '-' + axis.direction"
                 v-bind:isDisabled="isTransformDisabled"
-              ></CoordinateInputComponent>
+              ></UIPropertiesCoordinateInput>
             </v-col>
           </v-row>
 
@@ -50,11 +50,11 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 
-import CoordinateInputComponent from './CoordinateInputComponent.vue';
+import UIPropertiesCoordinateInput from './UIPropertiesCoordinateInput.vue';
 
 export default {
   components: {
-    CoordinateInputComponent,
+    UIPropertiesCoordinateInput,
   },
 
   data: function () {

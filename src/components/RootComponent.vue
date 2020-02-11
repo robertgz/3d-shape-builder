@@ -1,30 +1,23 @@
 <template>
-  <v-content  
-    v-on:keyup.native.delete="deletePressed" 
+  <div 
     ref="rootElement"
     id="rootComponent"
   >
 
-    <ThreeComponent />
-    <ToolsUI/>
-    <PropertiesUI/>
-    <AddObjectsToolbar/>
+    <TheThreeRoot />
+    <TheUIRoot/>
 
-  </v-content>
+  </div>
 </template>
 
 <script>
-import ThreeComponent from './ThreeComponent.vue';
-import ToolsUI from './ToolsUI.vue';
-import PropertiesUI from './PropertiesUI.vue';
-import AddObjectsToolbar from './AddObjectsToolbar.vue';
+import TheThreeRoot from './TheThreeRoot.vue';
+import TheUIRoot from './TheUIRoot.vue';
 
 export default {
   components: {
-    ThreeComponent,
-    ToolsUI,
-    PropertiesUI,
-    AddObjectsToolbar,
+    TheThreeRoot,
+    TheUIRoot,
   },
 
   provide: function() {  
@@ -44,10 +37,6 @@ export default {
   mounted: function () {  },
 
   methods: {
-
-    deletePressed: function(event) {
-      this.$store.dispatch('objects/deleteSelected');
-    },
 
     // getRootElement () {
     //   return this.$refs.rootElement;
