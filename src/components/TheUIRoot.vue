@@ -1,6 +1,5 @@
 <template>
   <v-content  
-    v-on:keyup.native.delete="deletePressed" 
     ref="rootUIElement"
     id="rootUIComponent"
   >
@@ -34,13 +33,7 @@ export default {
 
   mounted: function () {  },
 
-  methods: {
-
-    deletePressed: function(event) {
-      this.$store.dispatch('objects/deleteSelected');
-    },
-
-  }
+  methods: { }
 }
 </script>
 

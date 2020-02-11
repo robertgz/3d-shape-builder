@@ -1,5 +1,7 @@
 <template>
-  <div class="scene-holder" id="canvasID" ref="sceneContainer">
+  <div 
+    v-on:keyup.delete="deletePressed" 
+    class="scene-holder" id="canvasID" ref="sceneContainer">
   </div>
 </template>
 
@@ -109,6 +111,10 @@ export default {
       this.camera.updateProjectionMatrix();
     
       this.renderer.setSize(width, height);
+    },
+
+    deletePressed(event) {
+      this.$store.dispatch('objects/deleteSelected');
     },
 
     ...mapActions('scene', {

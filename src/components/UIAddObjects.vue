@@ -145,6 +145,7 @@ export default {
       this.dragGroup = null;
       this.setTransformControlActiveStatus( { status: this.transformControlStatus } );
 
+      this.getRendererElement.focus();
     },
 
     doubleClick(event, type) {
