@@ -41,9 +41,9 @@ export default {
     this.orbitControl.zoomSpeed = 1
 
     this.orbitControl.mouseButtons = {
-      LEFT: 0,
-      MIDDLE: 1,
-      RIGHT: 2
+      LEFT: null,
+      MIDDLE: THREE.MOUSE.PAN,
+      RIGHT: THREE.MOUSE.ROTATE
     };
     
   },
