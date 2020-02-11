@@ -11,25 +11,24 @@ export default {
     }
   },
 
-  inject: { threeElement: 'threeElement' },
-
   computed: {
 
     ...mapGetters('scene', {
       canvas: 'getCanvas',
+      threeElement: 'getRendererElementParent',
     }),
 
   },
 
   mounted: function () {
-    this.threeElement().addEventListener('click', this.clickEvent, false);
-    this.threeElement().addEventListener('mousedown', this.mouseDown, false);
+    this.threeElement.addEventListener('click', this.clickEvent, false);
+    this.threeElement.addEventListener('mousedown', this.mouseDown, false);
   },
 
   beforeDestroy: function() {
-    if (this.threeElement()) {
-      this.threeElement().removeEventListener('click', this.clickEvent, false);
-      this.threeElement().removeEventListener('mousedown', this.mouseDown, false);
+    if (this.threeElement) {
+      this.threeElement.removeEventListener('click', this.clickEvent, false);
+      this.threeElement.removeEventListener('mousedown', this.mouseDown, false);
     }
 
    },
@@ -111,15 +110,15 @@ export default {
     },
 
     addEventListeners() {
-      this.threeElement().addEventListener('mousemove', this.mouseMove, false);
-      this.threeElement().addEventListener('mouseout', this.mouseOut, false);
-      this.threeElement().addEventListener('mouseup', this.mouseUp, false);
+      this.threeElement.addEventListener('mousemove', this.mouseMove, false);
+      this.threeElement.addEventListener('mouseout', this.mouseOut, false);
+      this.threeElement.addEventListener('mouseup', this.mouseUp, false);
     },
 
     removeEventListeners() {
-      this.threeElement().removeEventListener('mousemove', this.mouseMove, false);
-      this.threeElement().removeEventListener('mouseout', this.mouseOut, false);
-      this.threeElement().removeEventListener('mouseup', this.mouseUp, false);
+      this.threeElement.removeEventListener('mousemove', this.mouseMove, false);
+      this.threeElement.removeEventListener('mouseout', this.mouseOut, false);
+      this.threeElement.removeEventListener('mouseup', this.mouseUp, false);
     },
 
   },

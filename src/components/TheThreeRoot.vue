@@ -40,26 +40,13 @@ export default {
     TransformControlsComponent,
   },
 
-  provide: function () {
-
-    return {
-      threeElement: this.getThreeElement,
-    }
-    
-  },
-
-  methods: {
-    
-    getThreeElement () {
-
-      return this.$refs.threeElement;
-
-    },
-
-  },
+  methods: {  },
 
 }
 </script>
 
 <style scoped>
+#threeElementID {
+  z-index: 1;
+}
 </style>

@@ -19,7 +19,6 @@ export default {
     }
   },
 
-  inject: { threeElement: 'threeElement' },
   mixins: [ coordinates, rayCasting, objects ],
 
   computed: {
@@ -34,6 +33,7 @@ export default {
       scene: 'getScene',
       camera: 'getCamera',
       controlsNode: 'getControlsNode',
+      threeElement: 'getRendererElementParent',
     }),    
   },
 
@@ -42,9 +42,9 @@ export default {
     this.$options.dragGroup.name = 'dragGroup';
     this.controlsNode.add(this.$options.dragGroup);
 
-    this.threeElement().addEventListener('mousedown', this.mouseDown, false);
-    this.threeElement().addEventListener('mousemove', this.mouseMove, false);
-    this.threeElement().addEventListener('mouseup', this.mouseUp, false);
+    this.threeElement.addEventListener('mousedown', this.mouseDown, false);
+    this.threeElement.addEventListener('mousemove', this.mouseMove, false);
+    this.threeElement.addEventListener('mouseup', this.mouseUp, false);
   },
 
   beforeDestroy: function() {
@@ -52,9 +52,9 @@ export default {
     this.$options.dragGroup = null;
 
     if (this.threeElement()) {
-      this.threeElement().removeEventListener('mousedown', this.mouseDown, false);
-      this.threeElement().removeEventListener('mousemove', this.mouseMove, false);
-      this.threeElement().removeEventListener('mouseup', this.mouseUp, false);
+      this.threeElement.removeEventListener('mousedown', this.mouseDown, false);
+      this.threeElement.removeEventListener('mousemove', this.mouseMove, false);
+      this.threeElement.removeEventListener('mouseup', this.mouseUp, false);
     }
   },
 

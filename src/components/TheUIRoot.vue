@@ -1,8 +1,8 @@
 <template>
   <v-content  
     v-on:keyup.native.delete="deletePressed" 
-    ref="rootElement"
-    id="rootComponent"
+    ref="rootUIElement"
+    id="rootUIComponent"
   >
 
     <UITools/>

@@ -1,17 +1,20 @@
 <template>
   <v-app>
-    <RootComponent/>
+    <TheThreeRoot />
+    <TheUIRoot />
   </v-app>
 </template>
 
 <script>
-import RootComponent from './components/RootComponent.vue';
+import TheThreeRoot from './components/TheThreeRoot.vue';
+import TheUIRoot from './components/TheUIRoot.vue';
 
 export default {
   name: 'App',
 
   components: {
-    RootComponent,
+    TheThreeRoot,
+    TheUIRoot,
   },
 
   data: () => ({

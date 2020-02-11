@@ -38,6 +38,10 @@ const scene = {
     getRendererElement (state) {
       return graph.renderer.domElement;
     },
+
+    getRendererElementParent (state) {
+      return graph.renderer.domElement.parentElement;
+    },
     
     getCamera (state) {
       return graph.camera;
