@@ -1,13 +1,9 @@
 <template>
 
-    <v-footer
-      style="border-radius: 10px; left: 125px; mb-12"
-      width="400" absolute color=" pink darken-2 "
-      class="toolbar"
-    >
+  <div id="add-objects-container" class="d-flex align-center justify-center" >
+    <div id="add-objects-toolbar" class="d-flex align-stretch teal darken-1 ma-3 pa-1" >
+      <div class="ma-2" v-for="shape of shapes" :key="shape.itemNum">
 
-        <v-row class="" justify="space-between">
-          <v-col v-for="shape of shapes" :key="shape.itemNum" cols="auto">
             <v-card 
               outlined
               class="text-center pa-1 toolBtn"
@@ -22,11 +18,11 @@
               
               <v-img :src="shape.image"></v-img>
             </v-card>
-          </v-col>
-        </v-row>
 
-    </v-footer>
-  
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script>
@@ -201,10 +197,13 @@ export default {
 </script>
 
 <style scoped>
-  .toolbar { 
-    opacity: 0.8;
-  }
-  .toolBtn {
-    opacity: 1;
-  }
+#add-objects-container {
+  position: fixed;
+  z-index: 5;
+  bottom: 0px;
+  width: 100%;
+}
+#add-objects-toolbar {
+  border-radius: 10px;
+}
 </style>
