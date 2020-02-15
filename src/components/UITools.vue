@@ -1,16 +1,8 @@
 <template>
-  <v-container
-    fluid
-    fill-height
-    id="tools-container"
-  >
-    <v-row
-      class="blue-grey ma-2"
-      id="tools"      
-    >
-      <v-col>
+  <div id="tools-container" class="d-flex flex-column justify-center" >
+    <div id="tools-toolbar" class="d-flex flex-column teal darken-1 ma-3 pa-1" >
 
-        <v-row class="my-2">
+        <div class="my-2">
           <v-tooltip right>
             <template v-slot:activator="{ on }">  
               <v-btn v-on:click="activateSelect" 
@@ -23,9 +15,9 @@
             </template>
             <span>Select</span>
           </v-tooltip>
-        </v-row>
+        </div>
 
-        <v-row class="my-2">
+        <div class="my-2">
           <v-tooltip right>
             <template v-slot:activator="{ on }">  
               <v-btn v-on:click="activateMove" 
@@ -38,9 +30,9 @@
             </template>
             <span>Move</span>
           </v-tooltip>
-        </v-row>
+        </div>
 
-        <v-row  class="my-2">
+        <div class="my-2">
           <v-tooltip right>
             <template v-slot:activator="{ on }">  
               <v-btn  v-on:click="activateRotate"
@@ -53,9 +45,9 @@
             </template>
             <span>Rotate</span>
           </v-tooltip>
-        </v-row>
+        </div>
  
-        <v-row class="my-2">
+        <div class="my-2">
           <v-tooltip right>
             <template v-slot:activator="{ on }">  
               <v-btn v-on:click="activateScale"
@@ -68,9 +60,9 @@
             </template>
             <span>Scale</span>
           </v-tooltip>
-        </v-row>
+        </div>
 
-        <v-row class="my-2">
+        <div class="my-2">
           <v-tooltip right>
             <template v-slot:activator="{ on }">  
               <v-btn v-on:click="deleteSelected" 
@@ -83,11 +75,10 @@
             </template>
             <span>Delete</span>
           </v-tooltip>
-        </v-row>
+        </div>
 
-      </v-col>
-    </v-row>
-  </v-container>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -184,9 +175,13 @@ export default {
 </script>
 
 <style scoped>
-#tools {
-  border-radius: 10px;
-  z-index: 5;
+#tools-container {
   position: fixed;
+  z-index: 4;
+  left: 0px;
+  height: 100%;
+}
+#tools-toolbar {
+  border-radius: 10px;
 }
 </style>
