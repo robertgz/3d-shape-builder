@@ -40,13 +40,12 @@ export default {
 
     },
 
-    intersectPlane(coord, plane, point) {
+    intersectPlane(coord, plane) {
       this.castRay(coord);
       
-      let localVec = new THREE.Vector3();
-      localVec.copy(point);
+      let pointPlaneIntersect = new THREE.Vector3();
 
-      return this.$options.raycaster.ray.intersectPlane(plane, localVec);
+      return this.$options.raycaster.ray.intersectPlane(plane, pointPlaneIntersect);
     },
 
     castRay (coord) {
