@@ -57,6 +57,7 @@ export default {
     dragGroup: null,
     transformControlStatus: false,
     objectDropped: false,
+    isDragging: false,
   }),
 
   computed: {
@@ -99,11 +100,16 @@ export default {
       this.transformControlStatus = this.isTransformControlActive;
       this.setTransformControlActiveStatus( { status: false } );
       this.objectDropped = false;
+      this.isDragging = true;
 
     },
 
     dragOver(event){
       event.preventDefault(); // Do NOT remove!
+      if (!this.isDragging) {
+        return;
+      }
+
       event.dataTransfer.dropEffect = "copy";
 
       if ( this.dragGroup && !this.dragGroup.visible ) {
@@ -117,6 +123,9 @@ export default {
 
     drop(event) {
       event.preventDefault(); // Do NOT remove!
+      if (!this.isDragging) {
+        return;
+      }
       
       let newObject = this.dragGroup.children[0];
 
@@ -130,6 +139,10 @@ export default {
     endDrag(event){
       event.preventDefault();
 
+      if (!this.isDragging) {
+        return;
+      }
+
       let newObject = this.dragGroup.children[0];
 
       if (!this.objectDropped) {
@@ -140,6 +153,7 @@ export default {
       this.helpersNode.remove(this.dragGroup);
       this.dragGroup = null;
       this.setTransformControlActiveStatus( { status: this.transformControlStatus } );
+      this.isDragging = false;
 
       this.getRendererElement.focus();
     },
