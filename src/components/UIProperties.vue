@@ -1,50 +1,41 @@
 <template>
+  <div id="properties-container" class="d-flex flex-column justify-top" >
+    <div id="properties-toolbar" class="d-flex flex-column teal darken-1 ma-3 pa-1" >
+      <div class="ma-2">
 
-  <v-content>
-    <v-navigation-drawer app 
-      v-model="drawer"
-      floating
-      permanent
-      right
-      width="200"
-      height="auto"
-      class="blue lighten-2 mr-2 mt-2 px-1"
-    >
-    <v-container>
-    <v-expansion-panels accordion >
-      <v-expansion-panel 
-        :disabled="isTransformDisabled"
-        v-for="transform of transforms"
-        :key="transform.id"
-      >
-        <v-expansion-panel-header class="capitalize">
-          {{transform.property}}
-        </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        <v-expansion-panels accordion >
+          <v-expansion-panel 
+            :disabled="isTransformDisabled"
+            v-for="transform of transforms"
+            :key="transform.id"
+          >
+            <v-expansion-panel-header class="capitalize">
+              {{transform.property}}
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
 
-          <v-row v-for="axis in axes" :key="axis.id">
-            <v-col class=" py-0">
-              <UIPropertiesCoordinateInput
-                v-bind:transform="transform.property"
-                v-bind:axis="axis.direction"
-                v-bind:stepAmount="stepAmount"
-                v-bind:blurPrecision="2"
-                v-bind:focusPrecision="8"
-                v-bind:elementID="transform.property + '-' + axis.direction"
-                v-bind:isDisabled="isTransformDisabled"
-              ></UIPropertiesCoordinateInput>
-            </v-col>
-          </v-row>
+              <v-row v-for="axis in axes" :key="axis.id">
+                <v-col class=" py-0">
+                  <UIPropertiesCoordinateInput
+                    v-bind:transform="transform.property"
+                    v-bind:axis="axis.direction"
+                    v-bind:stepAmount="stepAmount"
+                    v-bind:blurPrecision="2"
+                    v-bind:focusPrecision="8"
+                    v-bind:elementID="transform.property + '-' + axis.direction"
+                    v-bind:isDisabled="isTransformDisabled"
+                  ></UIPropertiesCoordinateInput>
+                </v-col>
+              </v-row>
 
-        </v-expansion-panel-content>        
-      </v-expansion-panel>
+            </v-expansion-panel-content>        
+          </v-expansion-panel>
 
-    </v-expansion-panels>
-    </v-container>
+        </v-expansion-panels>
 
-    </v-navigation-drawer>
-  </v-content>
-
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -110,6 +101,16 @@ export default {
 </script>
 
 <style scoped>
+#properties-container {
+  position: fixed;
+  z-index: 6;
+  right: 0px;
+  height: 100%;
+  width: 200px;
+}
+#properties-toolbar {
+  border-radius: 10px;
+}
 .capitalize {
   text-transform: capitalize;
 }
