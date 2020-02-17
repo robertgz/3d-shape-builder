@@ -7,6 +7,10 @@ import objects from '../mixins/objects';
 export default {
   // To access use prefix: this.$options
   dragGroup: null,
+  plane: new THREE.Plane(),
+  zVector: new THREE.Vector3(0, 0, 1),
+  intersectionPoint: new THREE.Vector3(),
+  offset: new THREE.Vector3(),
 
   data () {
     return {
@@ -68,6 +72,13 @@ export default {
 
       if ( clickedObject ) {
         this.objectID = this.getObjectID( clickedObject );
+
+        this.$options.intersectionPoint.copy(clickedObject.point);
+
+        this.$options.plane.setFromNormalAndCoplanarPoint(
+          this.$options.zVector,
+          this.$options.intersectionPoint);
+
       } else {
         this.objectID = '';
       }
@@ -80,10 +91,9 @@ export default {
       }
 
       let screenCoord = this.computeXYScreenCoords( event.clientX, event.clientY, window );
-      let pos = this.getXYZLocationFromClient( screenCoord.x, screenCoord.y, this.camera );
 
       if ( !this.isDragging ) {
-
+        // initialize the drag
         if ( !this.isObjectSelected( this.objectID ) ) {
 
           this.clearSelection();
@@ -93,9 +103,10 @@ export default {
           });
 
         }
-        this.$options.dragGroup.position = new THREE.Vector3(
-          pos.x, pos.y, 0.0
-        );
+
+        this.$options.offset.subVectors(
+          this.$options.dragGroup.position,
+          this.$options.intersectionPoint);
 
         this.attachObjectsToParent( this.getSelected, this.$options.dragGroup );
 
@@ -108,9 +119,13 @@ export default {
         this.isDragging = true;
       }
 
-      this.$options.dragGroup.position.set(
-        pos.x, pos.y, 0.0
-      );
+      let intersectionPlane = this.intersectPlane(
+        screenCoord,
+        this.$options.plane);
+
+      this.$options.dragGroup.position.addVectors(
+        intersectionPlane,
+        this.$options.offset);
 
     },
     mouseUp(event) {
