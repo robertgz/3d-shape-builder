@@ -40,6 +40,14 @@ export default {
 
     },
 
+    intersectPlane(coord, plane) {
+      this.castRay(coord);
+      
+      let pointPlaneIntersect = new THREE.Vector3();
+
+      return this.$options.raycaster.ray.intersectPlane(plane, pointPlaneIntersect);
+    },
+
     castRay (coord) {
 
       this.$options.raycaster.setFromCamera(
