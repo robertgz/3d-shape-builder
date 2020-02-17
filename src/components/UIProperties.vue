@@ -107,9 +107,11 @@ export default {
   right: 0px;
   height: 100%;
   width: 200px;
+  pointer-events: none;
 }
 #properties-toolbar {
   border-radius: 10px;
+  pointer-events: auto;
 }
 .capitalize {
   text-transform: capitalize;

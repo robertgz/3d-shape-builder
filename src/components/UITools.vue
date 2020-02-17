@@ -180,8 +180,10 @@ export default {
   z-index: 4;
   left: 0px;
   height: 100%;
+  pointer-events: none;
 }
 #tools-toolbar {
   border-radius: 10px;
+  pointer-events: auto;
 }
 </style>

@@ -216,8 +216,10 @@ export default {
   z-index: 5;
   bottom: 0px;
   width: 100%;
+  pointer-events: none;
 }
 #add-objects-toolbar {
   border-radius: 10px;
+  pointer-events: auto;
 }
 </style>
