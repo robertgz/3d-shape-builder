@@ -3,6 +3,6 @@ module.exports = {
     "vuetify"
   ],
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/3d-project/'
+    ? '/3d-shape-builder/'
     : '/'
 }
