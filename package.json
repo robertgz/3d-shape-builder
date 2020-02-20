@@ -1,8 +1,8 @@
 {
-  "name": "3d-shape-viewer",
+  "name": "3d-shape-builder",
   "version": "0.1.0",
   "private": true,
-  "description": "3D Shape Viewer",
+  "description": "3D Shape Builder",
   "author": "robertgz",
   "scripts": {
     "serve": "vue-cli-service serve",
