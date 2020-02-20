@@ -1,4 +1,4 @@
-# 3D Shape Viewer
+# 3D Shape Builder
 
 Browser based editor for creating basic 3D solids. 
 
