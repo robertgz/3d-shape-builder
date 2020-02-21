@@ -2,7 +2,7 @@
 
 Browser based editor for creating basic 3D solids. 
 
-![screen capture](/src/assets/screen-capture2020-02-20.png)
+![screen capture](src/assets/screen-capture2020-02-20.png)
 
 
 Drag and drop 3D shapes onto the modeling plane.
