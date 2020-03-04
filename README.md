@@ -19,10 +19,10 @@ Run applicaion at https://robertgz.github.io/3d-shape-builder/
 * Select shapes and then click the red delete button or press the delete key to remove shapes from the drawing plane.
 
 ## Libraries used
-* three.js
-* Vue.js
-* Vuex
-* Vuetify.js
+* [three.js](https://threejs.org/)
+* [Vue.js](https://vuejs.org/)
+* [Vuex](https://vuex.vuejs.org/)
+* [Vuetify.js](https://vuetifyjs.com/)
 
 ## Notes
 * Works with recent desktop versions of Chrome and Firefox.
