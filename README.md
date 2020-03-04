@@ -6,6 +6,12 @@ Browser based editor for creating and transforming basic 3D shapes.
 
 Drag and drop 3D shapes onto the modeling plane. Drag and transform created shapes.
 
+3D shapes supported
+* Box
+* Cylinder
+* Cone
+* Sphere
+
 ## Usage
 Run applicaion at https://robertgz.github.io/3d-shape-builder/
 
