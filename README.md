@@ -1,6 +1,6 @@
 # 3D Shape Builder
 
-Browser based editor for creating and transforming basic 3D solids.
+Browser based editor for creating and transforming basic 3D shapes.
 
 ![screen capture](src/assets/screen-capture2020-02-20.png)
 
