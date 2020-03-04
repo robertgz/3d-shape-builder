@@ -4,8 +4,6 @@ Browser based editor for creating and transforming basic 3D shapes.
 
 ![screen capture](src/assets/screen-capture2020-02-20.png)
 
-Drag and drop 3D shapes onto the modeling plane. Drag and transform created shapes.
-
 3D shapes supported
 * Box
 * Cylinder
