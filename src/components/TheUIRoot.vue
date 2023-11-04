@@ -1,5 +1,5 @@
 <template>
-  <v-content  
+  <v-main  
     ref="rootUIElement"
     id="rootUIComponent"
   >
@@ -8,7 +8,7 @@
     <UIProperties/>
     <UIAddObjects/>
 
-  </v-content>
+  </v-main>
 </template>
 
 <script>
