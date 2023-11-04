@@ -54,7 +54,7 @@ export default {
         new THREE.Vector2( coord.x, coord.y ),
         this.camera 
       );
-      this.$options.raycaster.linePrecision = 0.1;
+      this.$options.raycaster.params.Line.threshold = 0.1;
 
     },
   },

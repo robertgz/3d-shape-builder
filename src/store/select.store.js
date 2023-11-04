@@ -3,7 +3,7 @@ import * as THREE from 'three';
 function doRayCasting( mouse, camera, scene ) {
 
   data.raycaster.setFromCamera( mouse, camera );
-  data.raycaster.linePrecision = 0.1;
+  data.raycaster.params.Line.threshold = 0.1;
 
   return data.raycaster.intersectObjects( scene.children, true );
 
@@ -15,9 +15,10 @@ function getCentroid( objectIdList ) {
 
   let count = objectIdList.length;
   let sums = { x: 0, y: 0, z: 0 };
+  let pos = new THREE.Vector3( );
 
   objectIdList.forEach( objectId => {
-    let pos = data.selected.get(objectId).getWorldPosition();
+    pos = data.selected.get(objectId).getWorldPosition( pos );
 
     sums.x += parseFloat(pos.x);
     sums.y += parseFloat(pos.y);
