@@ -6,6 +6,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default {
+  base: '/3d-shape-builder/',
   plugins: [
     vue(),
     Components({
