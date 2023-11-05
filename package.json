@@ -19,7 +19,7 @@
     "@vitejs/plugin-vue2": "^2.2.0",
     "sass": "1.25.0",
     "unplugin-vue-components": "^0.25.2",
-    "vite": "^3.2.7",
+    "vite": "^4.5.0",
     "vue-cli-plugin-vuetify": "^2.5.8",
     "vuetify-loader": "^1.9.2"
   }
