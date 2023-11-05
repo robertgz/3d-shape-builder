@@ -29,28 +29,33 @@
 import * as THREE from 'three';
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 
+import imgUrlBox from '../assets/box.png'
+import imgUrlCylinder from '../assets/cylinder.png'
+import imgUrlCone from '../assets/cone.png'
+import imgUrlSphere from '../assets/sphere.png'
+
 export default {
 
   data: () => ({
     shapes: [ // get these from store
       { 
         type: "box",
-        image: require('../assets/box.png'),
+        image: imgUrlBox,
         itemNum: 1,
       },
       { 
         type: "cylinder",
-        image: require('../assets/cylinder.png'),
+        image: imgUrlCylinder,
         itemNum: 2,
       },
       { 
         type: "cone",
-        image: require('../assets/cone.png'),
+        image: imgUrlCone,
         itemNum: 3,
       },
       { 
         type: "sphere",
-        image: require('../assets/sphere.png'),
+        image: imgUrlSphere,
         itemNum: 4,
       },
     ],

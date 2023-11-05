@@ -75,7 +75,7 @@ const scene = {
       
       context.commit('setupScene');
       context.dispatch('objects/setup', null, { root: true });
-      console.log('setup done');
+      // console.log('setup done');
     },
 /*
     setup3 (context, { width, height }) {

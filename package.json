@@ -5,24 +5,22 @@
   "description": "3D Shape Builder",
   "author": "robertgz",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "dependencies": {
-    "core-js": "^3.33.2",
     "three": "0.119.1",
     "vue": "^2.7.15",
     "vuetify": "^2.7.1",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^5.0.8",
-    "@vue/cli-plugin-vuex": "^5.0.8",
-    "@vue/cli-service": "^5.0.8",
     "sass": "1.25.0",
-    "sass-loader": "8.0.2",
+    "unplugin-vue-components": "^0.25.2",
+    "vite": "^2.9.16",
+    "vite-plugin-vue2": "^2.0.3",
     "vue-cli-plugin-vuetify": "^2.5.8",
-    "vue-template-compiler": "^2.7.15",
     "vuetify-loader": "^1.9.2"
   }
 }
